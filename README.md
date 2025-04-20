@@ -43,7 +43,7 @@ The following hyperparameters were used during training:
 
 ### Encrypt Data in dataset and diffusers Folders
 
-To decrypt the dataset and diffusers folders, which are encrypted using git-crypt, contact me in this repository Issues tab to obtain the key. This data serves as a backup in case the original links are deleted.
+To decrypt the dataset and diffusers folders, which are encrypted using git-crypt, contact me in this repository [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/issues) to obtain the key. This data serves as a backup in case the original links are deleted.
 
 To decrypt the dataset and diffusers folders if they are encrypted using git-crypt:
 
