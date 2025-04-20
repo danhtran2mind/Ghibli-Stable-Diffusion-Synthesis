@@ -6,23 +6,31 @@
 **Source**: [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset)
 
 ## Base Model
-
+**Source**: [HuggingFace Model](https://huggingface.co/stabilityai/stable-diffusion-2-1-base)
 
 ## Training Hyperparameters
 
 The following hyperparameters were used during training:
-- learning_rate: 3e-4
-- train_batch_size: 12
-- eval_batch_size: 12
-- seed: 42
-- weight_decay: 0.01
-- optimizer: Adam with betas=(0.9,0.999) and epsilon=1e-08
-- num_epochs: 50
 
+- learning_rate: 1e-05
+- num_train_epochs: 40
+- train_batch_size: 2
+- gradient_accumulation_steps: 2
+- mixed_precision: "fp16"
+- resolution: 512
+- max_grad_norm: 1
+- lr_scheduler: "constant"
+- lr_warmup_steps: 0
+- checkpoints_total_limit: 1
+- mixed_precision
+- use_ema
+- use_8bit_adam
+- center_crop
+- random_flip
+- gradient_checkpointing
+- 
 ## Metric
-- Training loss: 0.052300
-- Validation loss: 0.006372
-- BLEU Score in Validation Set: 0.9964783232500736
+- Loss: 0.0345
 
 ## Dependencies Version
 
