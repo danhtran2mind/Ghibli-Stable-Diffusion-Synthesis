@@ -40,17 +40,73 @@ The following hyperparameters were used during training:
   ![Demo Image](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/visualization/demo_image.png?raw=true)
 
 
+
 ## Usage
+
+### Encrypt Data in dataset and diffusers Folders
+
+To decrypt the dataset and diffusers folders if they are encrypted using git-crypt:
+
+```bash
+git-crypt unlock /path/to/my-repo.asc
+```
+Ensure the path to the .asc key file is correct. This step assumes that git-crypt is installed and configured for the repository.
+
 ### Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
+### Download Model to Local `ghibli-fine-tuned-sd-2.1` Folder
+
+To download the fine-tuned model weights to the ghibli-fine-tuned-sd-2.1 folder:
+
+```bash
+cd ghibli-fine-tuned-sd-2.1
+python download_model.py
+cd ..
+```
+
+The download_model.py script is assumed to handle downloading the model from the HuggingFace repository.
+
+### Extract `dataset` Folder
+
+To download and extract the Ghibli dataset from HuggingFace:
+
+```bash
+cd dataset
+pip install datasets  # Ensure the HuggingFace datasets library is installed
+python extract_files.py
+cd ..
+```
+
+The extract_files.py script is assumed to handle downloading and extracting the dataset. Alternatively, you can manually download the dataset from the HuggingFace dataset page or use the following Python code:
+
+```python
+from datasets import load_dataset
+dataset = load_dataset("uwunish/ghibli-dataset")
+dataset.save_to_disk("./ghibli_dataset")
+```
+
+### Extract `diffusers` Folder
+
+To extract the fine-tuned model weights or related files in the diffusers folder:
+
+```bash
+cd diffusers
+python extract_files.py
+cd ..
+```
+
+The extract_files.py script in the diffusers folder is assumed to extract the fine-tuned model weights or related files, possibly downloaded as part of the download_model.py step. If the diffusers folder contains the model weights directly, verify its contents after downloading.
 
 ### Run Gradio Demo
+
 ```bash
 python app.py --local_model True  # Use True for local model, False to download from HuggingFace
 ```
-The app will be available at `localhost:7860`.
+
+The app will be available at localhost:7860.
 
 ## Environment
 - **Python Version**: 3.11.11
