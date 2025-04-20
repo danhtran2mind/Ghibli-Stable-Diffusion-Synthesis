@@ -8,7 +8,7 @@ This guide explains how to use the provided Python script to download all files 
 -   `huggingface_hub` library installed. Install it using:
     
     ```bash
-    pip install huggingface_hub
+    pip install huggingface-hub
     
     ```
     
