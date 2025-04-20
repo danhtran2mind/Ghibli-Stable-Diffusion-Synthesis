@@ -2,6 +2,11 @@
 This is a Jupyter notebook implementation for fine-tuning Stable Diffusion 2.1 to generate images in Studio Ghibli's iconic art style.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://jupyterlab.trydeepnote.com/from-github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+
 ## Training Notbook
 
 ## Dataset
