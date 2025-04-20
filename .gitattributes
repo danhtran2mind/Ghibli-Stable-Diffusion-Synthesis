@@ -1,2 +1,4 @@
 dataset/compress_file.zip.* filter=git-crypt diff=git-crypt
 diffusers/compress_file.zip.* filter=git-crypt diff=git-crypt
+dataset/compress_file.zip.* filter=lfs diff=lfs merge=lfs -text
+diffusers/compress_file.zip.* filter=lfs diff=lfs merge=lfs -text
