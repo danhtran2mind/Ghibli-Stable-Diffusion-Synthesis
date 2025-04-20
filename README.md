@@ -1,12 +1,36 @@
 # Ghibli Fine-Tuned Stable Diffusion 2.1
 
+## Training Notbook
+
+## Dataset
+**Source**: [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset)
+
+## Base Model
+
+
+## Training Hyperparameters
+
+The following hyperparameters were used during training:
+- learning_rate: 3e-4
+- train_batch_size: 12
+- eval_batch_size: 12
+- seed: 42
+- weight_decay: 0.01
+- optimizer: Adam with betas=(0.9,0.999) and epsilon=1e-08
+- num_epochs: 50
+
+## Metric
+- Training loss: 0.052300
+- Validation loss: 0.006372
+- BLEU Score in Validation Set: 0.9964783232500736
+
+## Dependencies Version
+
 ## Demonstration
 - **Demo URL**: [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1)
 - **Preview Image**:  
   ![Demo Image](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/visualization/demo_image.png?raw=true)
 
-## Dataset
-- **Source**: [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset)
 
 ## Usage
 ### Install Dependencies
