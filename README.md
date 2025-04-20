@@ -2,8 +2,8 @@
 # Ghibli Fine-Tuned Stable Diffusion 2.1
 
 ## Table of Contents
--   [Introduction]([https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#introduction](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#introduction))
--   [Key Features]([https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#key-features](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md)d#key-features)
+-   [Introduction](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#introduction)
+-   [Key Features](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#key-features)
 -   [Training Notebook](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#training-notebook)
 -   [Dataset](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#dataset)
 -   [Base Model](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/edit/main/README.md#base-model)
