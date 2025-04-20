@@ -2,7 +2,7 @@
 
 ## Demonstration
 - **Demo URL**: [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1)
-- **Preview Image**: [Insert Image Here]
+- **Preview Image**: [Demo Image](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/visualization/demo_image.png)
 
 ## Dataset
 - **Source**: [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset)
