@@ -1,5 +1,7 @@
 # Ghibli Fine-Tuned Stable Diffusion 2.1
+This is a Jupyter notebook implementation for fine-tuning Stable Diffusion 2.1 to generate images in Studio Ghibli's iconic art style.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 ## Training Notbook
 
 ## Dataset
