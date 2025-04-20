@@ -192,7 +192,7 @@ if __name__ == "__main__":
     @dataclasses.dataclass
     class AppArgs:
         local_model: bool = dataclasses.field(
-            default=False, metadata={"help": "Use local model path instead of Hugging Face model."}
+            default=True, metadata={"help": "Use local model path instead of Hugging Face model."}
         )
         model_name: str = dataclasses.field(
             default="danhtran2mind/ghibli-fine-tuned-sd-2.1",
@@ -222,5 +222,3 @@ if __name__ == "__main__":
 
     demo = create_demo(args.model_name, args.device)
     demo.launch(server_port=args.port, share=args.share)
-
-<<add option choose local_model when run app.py>>
