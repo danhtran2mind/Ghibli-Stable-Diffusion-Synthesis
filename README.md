@@ -172,69 +172,23 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
 
 The fine-tuning process was optimized with the following hyperparameters:
 
-Hyperparameter
-
-Value
-
-`learning_rate`
-
-1e-05
-
-`num_train_epochs`
-
-40
-
-`train_batch_size`
-
-2
-
-`gradient_accumulation_steps`
-
-2
-
-`mixed_precision`
-
-"fp16"
-
-`resolution`
-
-512
-
-`max_grad_norm`
-
-1
-
-`lr_scheduler`
-
-"constant"
-
-`lr_warmup_steps`
-
-0
-
-`checkpoints_total_limit`
-
-1
-
-`use_ema`
-
-True
-
-`use_8bit_adam`
-
-True
-
-`center_crop`
-
-True
-
-`random_flip`
-
-True
-
-`gradient_checkpointing`
-
-True
+| Hyperparameter | Value |
+| --- | --- |
+| `learning_rate` | 1e-05 |
+| `num_train_epochs` | 40 |
+| `train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 2 |
+| `mixed_precision` | "fp16" |
+| `resolution` | 512 |
+| `max_grad_norm` | 1 |
+| `lr_scheduler` | "constant" |
+| `lr_warmup_steps` | 0 |
+| `checkpoints_total_limit` | 1 |
+| `use_ema` | True |
+| `use_8bit_adam` | True |
+| `center_crop` | True |
+| `random_flip` | True |
+| `gradient_checkpointing` | True |
 
 These parameters were carefully selected to balance training efficiency and model performance, leveraging techniques like mixed precision and gradient checkpointing.
 
@@ -246,52 +200,21 @@ The fine-tuning process achieved a final loss of **0.0345**, indicating excellen
 
 The project was developed and tested in the following environment:
 
--   **Python Version**: 3.11.11
--   **Dependencies**:
+- **Python Version**: 3.11.11
+- **Dependencies**:
 
-Library
-
-Version
-
-huggingface-hub
-
-0.30.2
-
-accelerate
-
-1.3.0
-
-bitsandbytes
-
-0.45.5
-
-torch
-
-2.5.1
-
-Pillow
-
-11.1.0
-
-numpy
-
-1.26.4
-
-transformers
-
-4.51.1
-
-torchvision
-
-0.20.1
-
-diffusers
-
-0.33.1
-
-gradio
-
-Latest
+| Library | Version |
+| --- | --- |
+| huggingface-hub | 0.30.2 |
+| accelerate | 1.3.0 |
+| bitsandbytes | 0.45.5 |
+| torch | 2.5.1 |
+| Pillow | 11.1.0 |
+| numpy | 1.26.4 |
+| transformers | 4.51.1 |
+| torchvision | 0.20.1 |
+| diffusers | 0.33.1 |
+| gradio | Latest |
 
 Ensure your environment matches these specifications to avoid compatibility issues.
 
