@@ -1,16 +1,16 @@
 
 # Ghibli Fine-Tuned Stable Diffusion 2.1
 
-[![huggingface-hub](https://img.shields.io/badge/huggingface--hub-yellow.svg?logo=huggingface)](https://huggingface.co/docs/hub)
-[![accelerate](https://img.shields.io/badge/accelerate-%23FF6F61.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
+[![huggingface-hub](https://img.shields.io/badge/huggingface--hub-orange.svg?logo=huggingface)](https://huggingface.co/docs/hub)
+[![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
-[![torch](https://img.shields.io/badge/torch-%23EE4C2C.svg?logo=pytorch)](https://pytorch.org/)
-[![Pillow](https://img.shields.io/badge/Pillow-%2300A1D6.svg)](https://python-pillow.org/)
+[![torch](https://img.shields.io/badge/torch-yellow.svg?logo=pytorch)](https://pytorch.org/)
+[![Pillow](https://img.shields.io/badge/Pillow-%2300A1D6.svg)]([https://python-pillow.org/](https://pypi.org/project/pillow/))
 [![numpy](https://img.shields.io/badge/numpy-%23013243.svg?logo=numpy)](https://numpy.org/)
-[![transformers](https://img.shields.io/badge/transformers-%23FFD21E.svg?logo=huggingface)](https://huggingface.co/docs/transformers)
-[![torchvision](https://img.shields.io/badge/torchvision-%23EE4C2C.svg?logo=pytorch)](https://pytorch.org/vision/stable/index.html)
-[![diffusers](https://img.shields.io/badge/diffusers-%23FFD21E.svg?logo=huggingface)](https://huggingface.co/docs/diffusers)
-[![gradio](https://img.shields.io/badge/gradio-%231A6FE7.svg?logo=gradio)](https://gradio.app/)
+[![transformers](https://img.shields.io/badge/transformers-orange.svg?logo=huggingface)](https://huggingface.co/docs/transformers)
+[![torchvision](https://img.shields.io/badge/torchvision-yellow.svg?logo=pytorch)](https://pytorch.org/vision/stable/index.html)
+[![diffusers](https://img.shields.io/badge/diffusers-orange.svg?logo=huggingface)](https://huggingface.co/docs/diffusers)
+[![gradio](https://img.shields.io/badge/gradio-yellow.svg?logo=gradio)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
