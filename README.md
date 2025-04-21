@@ -5,7 +5,7 @@
 [![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
 [![torch](https://img.shields.io/badge/torch-yellow.svg?logo=pytorch)](https://pytorch.org/)
-[![Pillow](https://img.shields.io/badge/Pillow-%2300A1D6.svg)]([https://python-pillow.org/](https://pypi.org/project/pillow/))
+[![Pillow](https://img.shields.io/badge/Pillow-%2300A1D6.svg)](https://pypi.org/project/pillow/)
 [![numpy](https://img.shields.io/badge/numpy-%23013243.svg?logo=numpy)](https://numpy.org/)
 [![transformers](https://img.shields.io/badge/transformers-orange.svg?logo=huggingface)](https://huggingface.co/docs/transformers)
 [![torchvision](https://img.shields.io/badge/torchvision-yellow.svg?logo=pytorch)](https://pytorch.org/vision/stable/index.html)
