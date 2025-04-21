@@ -146,16 +146,7 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
     cd ..
     
     ```
-    
-    Alternatively, download the dataset manually with:
-    
-    ```python
-    from datasets import load_dataset
-    dataset = load_dataset("uwunish/ghibli-dataset")
-    dataset.save_to_disk("./ghibli_dataset")
-    
-    ```
-    
+        
 4.  **Extract the Diffusers Folder**:
     
     Extract the model weights or related files in the `diffusers` folder:
