@@ -14,23 +14,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
--   [Introduction](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#introduction)
--   [Key Features](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#key-features)
--   [Training Notebook](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#training-notebook)
--   [Dataset](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#dataset)
--   [Base Model](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#base-model)
--   [Installation](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#installation)
--   [Usage](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#usage)
-    -   [Running the Training Notebook](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#running-the-training-notebook)
-    -   [Running the Gradio Demo](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#running-the-gradio-demo)
--   [Training Hyperparameters](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#training-hyperparameters)
--   [Metrics](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#metrics)
--   [Environment](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#environment)
--   [Demonstration](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#demonstration)
--   [Contact](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#contact)
--   [License](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#license)
--   [Acknowledgements](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#acknowledgements)
--   [Contributing](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#contributing)
+-   [Introduction](./README.md#introduction)
+-   [Key Features](./README.md#key-features)
+-   [Training Notebook](./README.md#training-notebook)
+-   [Dataset](./README.md#dataset)
+-   [Base Model](./README.md#base-model)
+-   [Installation](./README.md#installation)
+-   [Usage](./README.md#usage)
+    -   [Running the Training Notebook](./README.md#running-the-training-notebook)
+    -   [Running the Gradio Demo](./README.md#running-the-gradio-demo)
+-   [Training Hyperparameters](./README.md#training-hyperparameters)
+-   [Metrics](./README.md#metrics)
+-   [Environment](./README.md#environment)
+-   [Demonstration](./README.md#demonstration)
+-   [Contact](./README.md#contact)
+-   [License](./README.md#license)
+-   [Acknowledgements](./README.md#acknowledgements)
+-   [Contributing](./README.md#contributing)
 
 ## Introduction
 
@@ -48,7 +48,7 @@ The **Ghibli Fine-Tuned Stable Diffusion 2.1** project is a cutting-edge endeavo
 
 The cornerstone of this project is the Jupyter notebook located at `notebooks/fine_tuned_sd_2_1_base-notebook.ipynb`. This notebook provides a step-by-step guide to fine-tuning the Stable Diffusion 2.1 model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://jupyterlab.trydeepnote.com/from-github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)  [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=./notebooks/fine_tuned_sd_2_1_base-notebook.ipynb) [![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://jupyterlab.trydeepnote.com/from-github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)  [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](./notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
 
@@ -234,7 +234,7 @@ Explore the model’s capabilities through the interactive demo hosted at [Ghibl
 
 **Preview Image**:
 
-![Demo Image](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/visualization/demo_image.png?raw=true)
+![Demo Image](./visualization/demo_image.png?raw=true)
 
 ## Contact
 
@@ -261,4 +261,4 @@ Contributions to this project are warmly welcomed! To contribute, please follow 
 3.  Commit your changes with clear and descriptive commit messages.
 4.  Push your branch and submit a pull request.
 
-For detailed guidelines, refer to the [CONTRIBUTING.md](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/CONTRIBUTING.md) file. Your contributions can help enhance the project and bring the Ghibli art style to a wider audience.
+For detailed guidelines, refer to the [CONTRIBUTING.md](./CONTRIBUTING.md) file. Your contributions can help enhance the project and bring the Ghibli art style to a wider audience.
