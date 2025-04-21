@@ -1,6 +1,16 @@
 
 # Ghibli Fine-Tuned Stable Diffusion 2.1
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![huggingface-hub](https://img.shields.io/pypi/v/huggingface-hub/0.30.2?label=huggingface-hub)](https://pypi.org/project/huggingface-hub/0.30.2/)
+[![accelerate](https://img.shields.io/pypi/v/accelerate/1.3.0?label=accelerate)](https://pypi.org/project/accelerate/1.3.0/)
+[![bitsandbytes](https://img.shields.io/pypi/v/bitsandbytes/0.45.5?label=bitsandbytes)](https://pypi.org/project/bitsandbytes/0.45.5/)
+[![torch](https://img.shields.io/pypi/v/torch/2.5.1?label=torch)](https://pypi.org/project/torch/2.5.1/)
+[![Pillow](https://img.shields.io/pypi/v/Pillow/11.1.0?label=Pillow)](https://pypi.org/project/Pillow/11.1.0/)
+[![numpy](https://img.shields.io/pypi/v/numpy/1.26.4?label=numpy)](https://pypi.org/project/numpy/1.26.4/)
+[![transformers](https://img.shields.io/pypi/v/transformers/4.51.1?label=transformers)](https://pypi.org/project/transformers/4.51.1/)
+[![torchvision](https://img.shields.io/pypi/v/torchvision/0.20.1?label=torchvision)](https://pypi.org/project/torchvision/0.20.1/)
+[![diffusers](https://img.shields.io/pypi/v/diffusers/0.33.1?label=diffusers)](https://pypi.org/project/diffusers/0.33.1/)
+[![gradio](https://img.shields.io/pypi/v/gradio?label=gradio)](https://pypi.org/project/gradio/)
 ## Table of Contents
 -   [Introduction](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#introduction)
 -   [Key Features](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/README.md#key-features)
