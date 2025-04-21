@@ -1,7 +1,7 @@
 
 # Ghibli Fine-Tuned Stable Diffusion 2.1
 
-![huggingface-hub](https://img.shields.io/badge/huggingface--hub-%23FFD21E.svg?logo=huggingface)](https://huggingface.co/docs/hub)
+[![huggingface-hub](https://img.shields.io/badge/huggingface--hub-%23FFD21E.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-%23FF6F61.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
 [![torch](https://img.shields.io/badge/torch-%23EE4C2C.svg?logo=pytorch)](https://pytorch.org/)
