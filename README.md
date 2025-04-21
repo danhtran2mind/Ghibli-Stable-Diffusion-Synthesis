@@ -1,6 +1,6 @@
 
 # Ghibli Fine-Tuned Stable Diffusion 2.1
-
+[![GitHub Stars](https://img.shields.io/github/stars/myuser/my-repo?label=Star&style=flat)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/stargazers)
 [![huggingface-hub](https://img.shields.io/badge/huggingface--hub-orange.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
