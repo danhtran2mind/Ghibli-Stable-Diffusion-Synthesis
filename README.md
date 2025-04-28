@@ -1,5 +1,5 @@
 
-# Ghibli Fine-Tuned Stable Diffusion 2.1 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/stargazers)
+# Ghibli Fine-Tuned Stable Diffusion 2.1 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers)
 [![huggingface-hub](https://img.shields.io/badge/huggingface--hub-orange.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
@@ -47,11 +47,11 @@ The **Ghibli Fine-Tuned Stable Diffusion 2.1** project is a cutting-edge endeavo
 
 The cornerstone of this project is the Jupyter notebook located at `notebooks/fine_tuned_sd_2_1_base-notebook.ipynb`. This notebook provides a step-by-step guide to fine-tuning the Stable Diffusion 2.1 model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
 
@@ -69,11 +69,11 @@ To set up the project, ensure you have Python 3.11 or later installed. The follo
 
 ### Step 1: Clone the Repository
 
-Clone the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo):
+Clone the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1):
 
 ```bash
-git clone https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo.git
-cd ghibli-fine-tuned-sd-2.1-repo
+git clone https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1.git
+cd ghibli-fine-tuned-sd-2.1
 
 ```
 
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 ### Step 3: Decrypt Encrypted Folders (if necessary)
 
-The `dataset` and `diffusers` folders are encrypted using git-crypt for security. To decrypt them, obtain the decryption key by contacting the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/issues). Then, run:
+The `dataset` and `diffusers` folders are encrypted using git-crypt for security. To decrypt them, obtain the decryption key by contacting the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/issues). Then, run:
 
 ```bash
 git-crypt unlock /path/to/my-repo.asc
@@ -118,7 +118,7 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
 1.  **Navigate to the Repository Root**:
     
     ```bash
-    cd ghibli-fine-tuned-sd-2.1-repo
+    cd ghibli-fine-tuned-sd-2.1
     
     ```
     
@@ -232,7 +232,7 @@ Explore the model’s capabilities through the interactive demo hosted at [Ghibl
 
 ## Contact
 
-For questions, issues, or to request the git-crypt decryption key, please contact the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo/issues) on GitHub.
+For questions, issues, or to request the git-crypt decryption key, please contact the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/issues) on GitHub.
 
 ## License
 
@@ -250,7 +250,7 @@ The success of this project is built upon the contributions of several key resou
 
 Contributions to this project are warmly welcomed! To contribute, please follow these steps:
 
-1.  Fork the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1-repo).
+1.  Fork the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1).
 2.  Create a new branch for your feature or bug fix.
 3.  Commit your changes with clear and descriptive commit messages.
 4.  Push your branch and submit a pull request.
