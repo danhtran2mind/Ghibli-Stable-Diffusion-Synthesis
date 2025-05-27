@@ -63,6 +63,15 @@ The project utilizes the [Ghibli Dataset](https://huggingface.co/datasets/uwunis
 
 The fine-tuning process is built upon the [Stable Diffusion 2.1 Base](https://huggingface.co/stabilityai/stable-diffusion-2-1-base) model by Stability AI. This robust text-to-image model provides a solid foundation, enabling high-fidelity image generation with targeted fine-tuning to achieve the Ghibli aesthetic.
 
+## Demonstration
+
+Explore the model’s capabilities through the interactive demo hosted at [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1). The demo allows users to generate Ghibli-style images effortlessly.
+
+**Preview Image**:
+
+![Demo Image](./visualization/demo_image.png?raw=true)
+
+
 ## Installation
 
 To set up the project, ensure you have Python 3.11 or later installed. The following steps guide you through cloning the repository, installing dependencies, and preparing encrypted data.
@@ -221,14 +230,6 @@ The project was developed and tested in the following environment:
 | gradio | Latest |
 
 Ensure your environment matches these specifications to avoid compatibility issues.
-
-## Demonstration
-
-Explore the model’s capabilities through the interactive demo hosted at [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1). The demo allows users to generate Ghibli-style images effortlessly.
-
-**Preview Image**:
-
-![Demo Image](./visualization/demo_image.png?raw=true)
 
 ## Contact
 
