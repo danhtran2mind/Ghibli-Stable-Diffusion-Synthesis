@@ -190,13 +190,13 @@ def create_demo(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ghibli-Style Image Generator using a fine-tuned Stable Diffusion model.")
     parser.add_argument(
-        "--local-model",
+        "--local_model",
         action="store_true",
         default=True,
         help="Use local model path instead of Hugging Face model."
     )
     parser.add_argument(
-        "--model-name",
+        "--model_name",
         type=str,
         default="danhtran2mind/ghibli-fine-tuned-sd-2.1",
         help="Model name or path for the fine-tuned Stable Diffusion model."
