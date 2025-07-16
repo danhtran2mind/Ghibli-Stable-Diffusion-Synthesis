@@ -144,9 +144,7 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
     Download the model weights to the `ghibli-fine-tuned-sd-2.1` folder:
     
     ```bash
-    cd ghibli-fine-tuned-sd-2.1
-    python download_model.py
-    cd ..
+    python scripts/download_models.py
     
     ```
     
