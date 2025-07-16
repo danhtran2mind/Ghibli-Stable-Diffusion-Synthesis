@@ -20,11 +20,11 @@ def get_examples(examples_dir: str = "assets/examples/ghibli-fine-tuned-sd-2.1")
     # Check if the directory exists
     if not os.path.exists(examples_dir) or not os.path.isdir(examples_dir):
         raise ValueError(f"Directory {examples_dir} does not exist or is not a directory")
-    
+
     # Get list of subfolder paths (e.g., 1, 2, etc.)
     all_examples_dir = [os.path.join(examples_dir, d) for d in os.listdir(examples_dir) 
                         if os.path.isdir(os.path.join(examples_dir, d))]
-    
+
     ans = []
     for example_dir in all_examples_dir:
         config_path = os.path.join(example_dir, "config.json")
