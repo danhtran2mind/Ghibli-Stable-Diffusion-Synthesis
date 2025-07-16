@@ -201,7 +201,7 @@ def create_demo(
                 output_image = gr.Image(label="Generated Image")
                 output_text = gr.Textbox(label="Status")
 
-        examples = get_examples("assets/examples")
+        examples = get_examples("assets/examples/ghibli-fine-tuned-sd-2.1")
         gr.Examples(
             examples=examples,
             inputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, output_image],
