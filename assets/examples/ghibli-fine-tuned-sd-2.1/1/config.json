@@ -5,5 +5,5 @@
     "num_inference_steps": 50,
     "guidance_scale": 3.5,
     "seed": 42,
-    "image": "./result.png"
+    "image": "result.png"
 }
