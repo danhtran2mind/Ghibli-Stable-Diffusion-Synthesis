@@ -1,0 +1,9 @@
+{
+    "prompt": "donald trump",
+    "height": 512,
+    "width": 768,
+    "num_inference_steps": 100,
+    "guidance_scale": 5.0,
+    "seed": 10,
+    "image": "./result.png"
+}
