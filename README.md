@@ -1,5 +1,12 @@
 
-# Ghibli Fine-Tuned Stable Diffusion 2.1 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers)
+# Ghibli Fine-Tuned Stable Diffusion 2.1 
+
+[![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers)
+
+
+[![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers) [![GitHub Views](https://img.shields.io/github/watchers/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=👀&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/watchers)
+
+<!--
 [![huggingface-hub](https://img.shields.io/badge/huggingface--hub-orange.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
 [![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%2300A1D6.svg)](https://github.com/TimDettmers/bitsandbytes)
@@ -11,6 +18,19 @@
 [![diffusers](https://img.shields.io/badge/diffusers-orange.svg?logo=huggingface)](https://huggingface.co/docs/diffusers)
 [![gradio](https://img.shields.io/badge/gradio-yellow.svg?logo=gradio)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+-->
+
+[![huggingface-hub](https://img.shields.io/badge/huggingface--hub-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/hub)
+[![accelerate](https://img.shields.io/badge/accelerate-%232B6DB2.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
+[![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%232B6DB2.svg)](https://github.com/TimDettmers/bitsandbytes)
+[![torch](https://img.shields.io/badge/torch-%232B6DB2.svg?logo=pytorch)](https://pytorch.org/)
+[![Pillow](https://img.shields.io/badge/Pillow-%232B6DB2.svg)](https://pypi.org/project/pillow/)
+[![numpy](https://img.shields.io/badge/numpy-%232B6DB2.svg?logo=numpy)](https://numpy.org/)
+[![transformers](https://img.shields.io/badge/transformers-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/transformers)
+[![torchvision](https://img.shields.io/badge/torchvision-%232B6DB2.svg?logo=pytorch)](https://pytorch.org/vision/stable/index.html)
+[![diffusers](https://img.shields.io/badge/diffusers-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/diffusers)
+[![gradio](https://img.shields.io/badge/gradio-%232B6DB2.svg?logo=gradio)](https://gradio.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-%232B6DB2.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 -   [Introduction](./README.md#introduction)
@@ -51,6 +71,9 @@ The cornerstone of this project is the Jupyter notebook located at `notebooks/fi
 [![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 [![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 [![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in Gradient](https://assets.paperspace.com/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2Fghibli-fine-tuned-sd-2.1%2Fblob%2Fmain%2Fnotebooks%2Ffine_tuned_sd_2_1_base-notebook.ipynb)
 [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
@@ -69,7 +92,7 @@ Explore the model’s capabilities through the interactive demo hosted at [Ghibl
 
 **Preview Image**:
 
-![Demo Image](./visualization/demo_image.png?raw=true)
+![Demo Image](./assets/demo_image.png?raw=true)
 
 
 ## Installation
