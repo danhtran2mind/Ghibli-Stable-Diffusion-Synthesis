@@ -180,11 +180,11 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
     Launch the Gradio demo to interact with the model:
     
     ```bash
-    python app.py --local_model True
+    python app.py --local_model
     
     ```
     
-    The demo will be available at `localhost:7860`. Use `--local_model True` for the local model or `False` to download from Hugging Face.
+    The demo will be available at `localhost:7860`. Use `--local_model` for the local model or not pass this args to download from Hugging Face.
     
 
 ## Training Hyperparameters
