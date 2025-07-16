@@ -1,14 +1,20 @@
 
 # Ghibli Fine-Tuned Stable Diffusion 2.1 
 
-<div style="text-align: center;">
- <a href="https://hits.sh/github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/">
-    <img src="https://hits.sh/github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1.svg?label=Repository%20Views&extraCount=1&color=00A1D6" alt="Repository Views">
-  </a>
-  <a href="https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers">
-    <img src="https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?style=social&label=Repo%20stars" alt="GitHub Stars">
-  </a>
-</div>
+[![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?style=social&label=Repo%20stars)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers)
+[![Hits](https://hits.sh/github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1.svg?label=Repository%20Views&extraCount=1&logo=hit&style=social&color=00A1D6&labelColor=faf7f7)](https://hits.sh/github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/)
+
+[![huggingface-hub](https://img.shields.io/badge/huggingface--hub-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/hub)
+[![accelerate](https://img.shields.io/badge/accelerate-%232B6DB2.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
+[![bitsandbytes](https://img.shields.io/badge/bitsandbytes-%232B6DB2.svg)](https://github.com/TimDettmers/bitsandbytes)
+[![torch](https://img.shields.io/badge/torch-%232B6DB2.svg?logo=pytorch)](https://pytorch.org/)
+[![Pillow](https://img.shields.io/badge/Pillow-%232B6DB2.svg)](https://pypi.org/project/pillow/)
+[![numpy](https://img.shields.io/badge/numpy-%232B6DB2.svg?logo=numpy)](https://numpy.org/)
+[![transformers](https://img.shields.io/badge/transformers-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/transformers)
+[![torchvision](https://img.shields.io/badge/torchvision-%232B6DB2.svg?logo=pytorch)](https://pytorch.org/vision/stable/index.html)
+[![diffusers](https://img.shields.io/badge/diffusers-%232B6DB2.svg?logo=huggingface)](https://huggingface.co/docs/diffusers)
+[![gradio](https://img.shields.io/badge/gradio-%232B6DB2.svg?logo=gradio)](https://gradio.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-%232B6DB2.svg)](https://opensource.org/licenses/MIT)
 
 
 ## Table of Contents
