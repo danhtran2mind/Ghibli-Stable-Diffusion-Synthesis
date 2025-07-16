@@ -19,6 +19,7 @@ def get_examples(examples_dir: str = "assets/examples/ghibli-fine-tuned-sd-2.1")
     """
     examples = Path(examples_dir)
     ans = []
+    print("examples.iterdir(: ", examples.iterdir())
     for example in examples.iterdir():
         if not example.is_dir():
             continue
