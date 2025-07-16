@@ -19,7 +19,10 @@ def get_examples(examples_dir: str = "assets/examples/ghibli-fine-tuned-sd-2.1")
     """
     examples = Path(examples_dir)
     ans = []
-    print("examples.iterdir(: ", examples.iterdir())
+    # Get the first item from the iterator
+    first_item = next(examples.iterdir(), None)  # Returns None if directory is empty
+    ans.append(first_item)
+    print("First item:", first_item)
     for example in examples.iterdir():
         if not example.is_dir():
             continue
