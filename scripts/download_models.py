@@ -3,7 +3,7 @@ from huggingface_hub import HfApi, hf_hub_download
 
 # Specify the repository and local directory
 repo_id = "danhtran2mind/ghibli-fine-tuned-sd-2.1"
-local_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "checkpoints", "ghibli-fine-tuned-sd-2.1")
+local_dir = os.path.join(os.path.dirname(__file__), "..", "checkpoints", "ghibli-fine-tuned-sd-2.1")
 
 # Create the directory if it doesn't exist
 os.makedirs(local_dir, exist_ok=True)
