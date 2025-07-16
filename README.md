@@ -6,6 +6,8 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=⭐&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers) [![GitHub Views](https://img.shields.io/github/watchers/danhtran2mind/ghibli-fine-tuned-sd-2.1?label=👀&style=social)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/watchers)
 
+
+
 <!--
 [![huggingface-hub](https://img.shields.io/badge/huggingface--hub-orange.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-yellow.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
