@@ -11,7 +11,7 @@ from diffusers import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
 from tqdm import tqdm
 from transformers import HfArgumentParser
 
-def get_examples(examples_dir: str = "assets/examples") -> list:
+def get_examples(examples_dir: str = "assets/examples/ghibli-fine-tuned-sd-2.1") -> list:
     """
     Load example data from the assets/examples directory.
     Each example is a subdirectory containing a config.json and an image file.
