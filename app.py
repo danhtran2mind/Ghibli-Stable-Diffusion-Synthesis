@@ -1,4 +1,4 @@
-import dataclasses
+import argparse
 import json
 from pathlib import Path
 
@@ -188,37 +188,43 @@ def create_demo(
     return demo
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Ghibli-Style Image Generator using a fine-tuned Stable Diffusion model.")
+    parser.add_argument(
+        "--local-model",
+        action="store_true",
+        default=True,
+        help="Use local model path instead of Hugging Face model."
+    )
+    parser.add_argument(
+        "--model-name",
+        type=str,
+        default="danhtran2mind/ghibli-fine-tuned-sd-2.1",
+        help="Model name or path for the fine-tuned Stable Diffusion model."
+    )
+    parser.add_argument(
+        "--device",
+        type=str,
+        default="cuda" if torch.cuda.is_available() else "cpu",
+        help="Device to run the model on (e.g., 'cuda', 'cpu')."
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=7860,
+        help="Port to run the Gradio app on."
+    )
+    parser.add_argument(
+        "--share",
+        action="store_true",
+        default=False,
+        help="Set to True for public sharing (Hugging Face Spaces)."
+    )
 
-    @dataclasses.dataclass
-    class AppArgs:
-        local_model: bool = dataclasses.field(
-            default=True, metadata={"help": "Use local model path instead of Hugging Face model."}
-        )
-        model_name: str = dataclasses.field(
-            default="danhtran2mind/ghibli-fine-tuned-sd-2.1",
-            metadata={"help": "Model name or path for the fine-tuned Stable Diffusion model."}
-        )
-        device: str = dataclasses.field(
-            default="cuda" if torch.cuda.is_available() else "cpu",
-            metadata={"help": "Device to run the model on (e.g., 'cuda', 'cpu')."}
-        )
-        port: int = dataclasses.field(
-            default=7860, metadata={"help": "Port to run the Gradio app on."}
-        )
-        share: bool = dataclasses.field(
-            default=False, metadata={"help": "Set to True for public sharing (Hugging Face Spaces)."}
-        )
-
-    parser = HfArgumentParser([AppArgs])
-    args_tuple = parser.parse_args_into_dataclasses()
-    args = args_tuple[0]
+    args = parser.parse_args()
 
     # Set model_name based on local_model flag
     if args.local_model:
-        args.model_name = "ghibli-fine-tuned-sd-2.1"
-
-    demo = create_demo(args.model_name, args.device)
-    demo.launch(server_port=args.port, share=args.share)
+        args.model_name = "./checkpoints/ghibli-fine-tuned-sd-2.1"
 
     demo = create_demo(args.model_name, args.device)
     demo.launch(server_port=args.port, share=args.share)
