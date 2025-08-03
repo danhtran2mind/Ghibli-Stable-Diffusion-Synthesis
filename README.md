@@ -1,8 +1,8 @@
 
-# Ghibli Fine-Tuned Stable Diffusion 2.1 
+# Ghibli Stable Diffusion Synthesis 🎨
 
-[![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/ghibli-fine-tuned-sd-2.1?style=social&label=Repo%20Stars)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/stargazers)
-![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2Fghibli-fine-tuned-sd-2.1&label=Repo+Views&icon=github&color=%236f42c1&message=&style=social&tz=UTC)
+[![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis?style=social&label=Repo%20Stars)](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/stargazers)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FGhibli-Stable-Diffusion-Synthesis&label=Repo+Views&icon=github&color=%236f42c1&message=&style=social&tz=UTC)
 
 [![huggingface-hub](https://img.shields.io/badge/huggingface--hub-blue.svg?logo=huggingface)](https://huggingface.co/docs/hub)
 [![accelerate](https://img.shields.io/badge/accelerate-blue.svg?logo=pytorch)](https://huggingface.co/docs/accelerate)
@@ -17,7 +17,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 
-## Table of Contents
+<!-- ## Table of Contents
 -   [Introduction](./README.md#introduction)
 -   [Key Features](./README.md#key-features)
 -   [Training Notebook](./README.md#training-notebook)
@@ -34,7 +34,7 @@
 -   [Contact](./README.md#contact)
 -   [License](./README.md#license)
 -   [Acknowledgements](./README.md#acknowledgements)
--   [Contributing](./README.md#contributing)
+-   [Contributing](./README.md#contributing) -->
 
 ## Introduction
 
@@ -50,16 +50,16 @@ The **Ghibli Fine-Tuned Stable Diffusion 2.1** project is a cutting-edge endeavo
 
 ## Training Notebook
 
-The cornerstone of this project is the Jupyter notebook located at `notebooks/fine_tuned_sd_2_1_base-notebook.ipynb`. This notebook provides a step-by-step guide to fine-tuning the Stable Diffusion 2.1 model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
+The cornerstone of this project is the Jupyter notebook located at `notebooks/ghibli-sd-2.1-base-finetuning.ipynb`. This notebook provides a step-by-step guide to fine-tuning the Stable Diffusion 2.1 model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in Gradient](https://assets.paperspace.com/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/ghibli-fine-tuned-sd-2.1/main?filepath=notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
-[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2Fghibli-fine-tuned-sd-2.1%2Fblob%2Fmain%2Fnotebooks%2Ffine_tuned_sd_2_1_base-notebook.ipynb)
-[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/blob/main/notebooks/fine_tuned_sd_2_1_base-notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/main?filepath=notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![Open in Gradient](https://assets.paperspace.com/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/main?filepath=notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FGhibli-Stable-Diffusion-Synthesis%2Fblob%2Fmain%2Fnotebooks%2Fghibli-sd-2.1-base-finetuning.ipynb)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
 
@@ -73,7 +73,7 @@ The fine-tuning process is built upon the [Stable Diffusion 2.1 Base](https://hu
 
 ## Demonstration
 
-Explore the model’s capabilities through the interactive demo hosted at [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1). The demo allows users to generate Ghibli-style images effortlessly.
+Explore the model’s capabilities through the interactive demo hosted at [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis). The demo allows users to generate Ghibli-style images effortlessly.
 
 **Preview Image**:
 
@@ -86,11 +86,11 @@ To set up the project, ensure you have Python 3.11 or later installed. The follo
 
 ### Step 1: Clone the Repository
 
-Clone the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1):
+Clone the repository from [GitHub](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis):
 
 ```bash
-git clone https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1.git
-cd ghibli-fine-tuned-sd-2.1
+git clone https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis.git
+cd Ghibli-Stable-Diffusion-Synthesis
 
 ```
 
@@ -105,7 +105,7 @@ pip install -r requirements.txt
 
 ### Step 3: Decrypt Encrypted Folders (if necessary)
 
-The `dataset` and `diffusers` folders are encrypted using git-crypt for security. To decrypt them, obtain the decryption key by contacting the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/issues). Then, run:
+The `dataset` and `diffusers` folders are encrypted using git-crypt for security. To decrypt them, obtain the decryption key by contacting the maintainer via the [Issues tab](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/issues). Then, run:
 
 ```bash
 git-crypt unlock /path/to/my-repo.asc
@@ -120,7 +120,7 @@ The project supports two primary use cases: training the model using the Jupyter
 
 ### Running the Training Notebook
 
-The training notebook (`notebooks/fine_tuned_sd_2_1_base-notebook.ipynb`) is the core component for fine-tuning the model. To run it:
+The training notebook (`notebooks/ghibli-sd-2.1-base-finetuning.ipynb`) is the core component for fine-tuning the model. To run it:
 
 1.  Open the notebook in your preferred platform (Colab, SageMaker, Deepnote, or JupyterLab).
 2.  Follow the setup instructions within the notebook to configure the environment.
@@ -135,7 +135,7 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
 1.  **Navigate to the Repository Root**:
     
     ```bash
-    cd ghibli-fine-tuned-sd-2.1
+    cd Ghibli-Stable-Diffusion-Synthesis
     
     ```
     

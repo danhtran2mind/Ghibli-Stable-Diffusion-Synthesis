@@ -1,9 +1,0 @@
-{
-    "prompt": "a serene landscape in Ghibli style",
-    "height": 256,
-    "width": 512,
-    "num_inference_steps": 50,
-    "guidance_scale": 3.5,
-    "seed": 42,
-    "image": "result.png"
-}

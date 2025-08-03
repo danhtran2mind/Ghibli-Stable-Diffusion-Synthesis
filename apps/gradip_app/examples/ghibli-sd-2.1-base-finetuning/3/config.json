@@ -1,0 +1,9 @@
+{
+    "prompt": "a dancer in Ghibli style",
+    "height": 384,
+    "width": 192,
+    "num_inference_steps": 50,
+    "guidance_scale": 6.5,
+    "seed": 4223,
+    "image": "result.png"
+}
