@@ -1,0 +1,14 @@
+{
+    "prompt": "In a soft, Ghibli style, Elon Musk is in a suit.",
+    "height": 512,
+    "width": 512,
+    "num_inference_steps": 82,
+    "guidance_scale": 18,
+    "seed": 1,
+    "image": "result.png",
+    "use_lora": true,
+    "lora_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+    "base_model_id": "stabilityai/stable-diffusion-2-1",
+    "lora_rank": 81,
+    "lora_scale": 1.4
+}

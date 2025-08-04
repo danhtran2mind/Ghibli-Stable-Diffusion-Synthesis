@@ -1,5 +1,6 @@
 import argparse
 import json
+from typing import Union, List
 from pathlib import Path
 import os
 import gradio as gr
@@ -23,108 +24,121 @@ def load_model_configs(config_path: str = "configs/model_ckpts.yaml") -> dict:
     except (IOError, yaml.YAMLError) as e:
         raise ValueError(f"Error loading {config_path}: {e}")
 
-def get_examples(examples_dir: str = "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning") -> list:
+def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning") -> List:
     """
-    Load examples from the specified directory.
-    Returns a list of examples with validated image paths and required fields.
+    Retrieves a list of file paths from the specified directory or directories.
+    
+    Args:
+        examples_dir: Either a single string path or a list of paths to directories containing example files.
+                     Defaults to "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning".
+    
+    Returns:
+        List of example configurations as lists containing prompt, dimensions, and model settings.
+    
+    Raises:
+        FileNotFoundError: If a specified directory does not exist.
     """
     print(f"DEBUG: Checking examples directory: {examples_dir}")
-    if not os.path.exists(examples_dir) or not os.path.isdir(examples_dir):
-        print(f"Error: Directory {examples_dir} does not exist or is not a directory")
-        fallback_image_path = "apps/gradio_app/assets/examples/default_image.png"
-        if not os.path.isfile(fallback_image_path):
-            print(f"Error: Fallback image {fallback_image_path} not found")
-            fallback_image_path = None
-        return [
-            ["a serene landscape in Ghibli style", 512, 512, 50, 7.5, 42, fallback_image_path, False,
-             "stabilityai/stable-diffusion-2-1-base", None, None, None, None]
-        ]
-
-    all_examples_dir = [os.path.join(examples_dir, d) for d in os.listdir(examples_dir) 
-                        if os.path.isdir(os.path.join(examples_dir, d))]
-    print(f"DEBUG: Found example directories: {all_examples_dir}")
+    
+    # Convert single string to list for uniform processing
+    directories = [examples_dir] if isinstance(examples_dir, str) else examples_dir
+    
+    # Validate directories
+    valid_dirs = []
+    for d in directories:
+        if not os.path.exists(d) or not os.path.isdir(d):
+            print(f"Error: Directory {d} does not exist or is not a directory")
+            continue
+        valid_dirs.append(d)
+    
+    if not valid_dirs:
+        print("Error: No valid directories found, using default example")
+        return get_default_example()
+    
     ans = []
-
-    for example_dir in sorted(all_examples_dir):
-        config_path = os.path.join(example_dir, "config.json")
-        image_path = os.path.join(example_dir, "result.png")
-        print(f"DEBUG: Processing example directory: {example_dir}")
-        print(f"DEBUG: Config path: {config_path}, Image path: {image_path}")
+    for dir_path in valid_dirs:
+        # Get subdirectories
+        all_examples_dir = [os.path.join(dir_path, d) for d in os.listdir(dir_path) 
+                           if os.path.isdir(os.path.join(dir_path, d))]
+        print(f"DEBUG: Found example directories in {dir_path}: {all_examples_dir}")
         
-        if not os.path.isfile(config_path):
-            print(f"Error: config.json not found in {example_dir}")
-            continue
-        if not os.path.isfile(image_path):
-            print(f"Error: result.png not found in {example_dir}")
-            continue
-        
-        try:
-            with open(config_path, 'r') as f:
-                example_dict = json.load(f)
-            print(f"DEBUG: Loaded config: {example_dict}")
-        except (json.JSONDecodeError, IOError) as e:
-            print(f"Error reading or parsing {config_path}: {e}")
-            continue
-        
-        required_keys = ["prompt", "height", "width", "num_inference_steps", "guidance_scale", "seed", "image"]
-        if example_dict.get("use_lora", False):
-            required_keys.extend(["lora_model_id", "base_model_id", "lora_rank", "lora_scale"])
-        else:
-            required_keys.append("finetune_model_id")
-        
-        if not all(key in example_dict for key in required_keys):
-            print(f"Error: Missing required keys in {config_path}: {', '.join(set(required_keys) - set(example_dict.keys()))}")
-            continue
-        
-        if example_dict["image"] != "result.png":
-            print(f"Error: Image key in {config_path} does not match 'result.png'")
-            continue
-        
-        try:
-            if not Path(image_path).is_file():
-                print(f"Error: Image file {image_path} does not exist")
+        for example_dir in sorted(all_examples_dir):
+            config_path = os.path.join(example_dir, "config.json")
+            image_path = os.path.join(example_dir, "result.png")
+            print(f"DEBUG: Processing example directory: {example_dir}")
+            print(f"DEBUG: Config path: {config_path}, Image path: {image_path}")
+            
+            if not os.path.isfile(config_path):
+                print(f"Error: config.json not found in {example_dir}")
                 continue
-                
+            if not os.path.isfile(image_path):
+                print(f"Error: result.png not found in {example_dir}")
+                continue
+            
             try:
-                Image.open(image_path).verify()
-                print(f"DEBUG: Image verified: {image_path}")
-            except Exception as e:
-                print(f"Error: Invalid image file {image_path}: {e}")
+                with open(config_path, 'r') as f:
+                    example_dict = json.load(f)
+                print(f"DEBUG: Loaded config: {example_dict}")
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"Error reading or parsing {config_path}: {e}")
                 continue
-                
-            example_list = [
-                example_dict["prompt"],
-                example_dict["height"],
-                example_dict["width"],
-                example_dict["num_inference_steps"],
-                example_dict["guidance_scale"],
-                example_dict["seed"],
-                image_path,
-                example_dict.get("use_lora", False),
-                example_dict.get("finetune_model_id", None),
-                example_dict.get("lora_model_id", None),
-                example_dict.get("base_model_id", None),
-                example_dict.get("lora_rank", None),
-                example_dict.get("lora_scale", None)
-            ]
-            ans.append(example_list)
-        except KeyError as e:
-            print(f"Error processing {config_path}: Missing key {e}")
-            continue
+            
+            required_keys = ["prompt", "height", "width", "num_inference_steps", 
+                           "guidance_scale", "seed", "image"]
+            if example_dict.get("use_lora", False):
+                required_keys.extend(["lora_model_id", "base_model_id", "lora_rank", "lora_scale"])
+            else:
+                required_keys.append("finetune_model_id")
+            
+            missing_keys = set(required_keys) - set(example_dict.keys())
+            if missing_keys:
+                print(f"Error: Missing required keys in {config_path}: {', '.join(missing_keys)}")
+                continue
+            
+            if example_dict["image"] != "result.png":
+                print(f"Error: Image key in {config_path} does not match 'result.png'")
+                continue
+            
+            try:
+                if not Path(image_path).is_file():
+                    print(f"Error: Image file {image_path} does not exist")
+                    continue
+                    
+                try:
+                    Image.open(image_path).verify()
+                    print(f"DEBUG: Image verified: {image_path}")
+                except Exception as e:
+                    print(f"Error: Invalid image file {image_path}: {e}")
+                    continue
+                    
+                example_list = [
+                    example_dict["prompt"],
+                    example_dict["height"],
+                    example_dict["width"],
+                    example_dict["num_inference_steps"],
+                    example_dict["guidance_scale"],
+                    example_dict["seed"],
+                    image_path,
+                    example_dict.get("use_lora", False),
+                    example_dict.get("finetune_model_id", None),
+                    example_dict.get("lora_model_id", None),
+                    example_dict.get("base_model_id", None),
+                    example_dict.get("lora_rank", None),
+                    example_dict.get("lora_scale", None)
+                ]
+                ans.append(example_list)
+            except KeyError as e:
+                print(f"Error processing {config_path}: Missing key {e}")
+                continue
     
     if not ans:
         print("DEBUG: No valid examples found, using default example")
-        fallback_image_path = "apps/gradio_app/assets/examples/default_image.png"
-        if not os.path.isfile(fallback_image_path):
-            print(f"Error: Fallback image {fallback_image_path} not found")
-            fallback_image_path = None
-        ans = [
-            ["a serene landscape in Ghibli style", 512, 512, 50, 7.5, 42, fallback_image_path, False,
-             "stabilityai/stable-diffusion-2-1-base", None, None, None, None]
-        ]
-
-    for an in ans:
-        print(f"DEBUG: Final loaded example: {an}")
+        return [
+        ["a serene landscape in Ghibli style", 256, 512, 50, 3.5, 42, 
+         "apps/gradio_app/assets/examples/default_image.png", False, "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning", 
+         None, None, None, None]
+    ]
+    
     return ans
 
 def create_demo(
@@ -306,7 +320,6 @@ def create_demo(
     def load_example_image(prompt, height, width, num_inference_steps, guidance_scale,
                           seed, image_path, use_lora, finetune_model_id, lora_model_id,
                           base_model_id, lora_rank, lora_scale):
-        print("DEBUG: Entering load_example_image")
         print(f"DEBUG: Inputs: prompt={prompt}, image_path={image_path}, use_lora={use_lora}")
         print(f"DEBUG: All inputs: {locals()}")
         
@@ -470,19 +483,6 @@ def create_demo(
 
         stop_btn.click(fn=None, inputs=None, outputs=None, cancels=[generate_event])
 
-        # test_btn.click(
-        #     fn=load_example_image,
-        #     inputs=[
-        #         prompt, height, width, num_inference_steps, guidance_scale, seed,
-        #         image_path, use_lora, finetune_model_path, lora_model_path,
-        #         base_model_path, lora_rank, lora_scale
-        #     ],
-        #     outputs=[
-        #         prompt, height, width, num_inference_steps, guidance_scale, seed,
-        #         output_image, use_lora, finetune_model_path, lora_model_path,
-        #         base_model_path, lora_rank, lora_scale, output_text
-        #     ]
-        # )
 
         def cleanup():
             print("DEBUG: Cleaning up resources...")
