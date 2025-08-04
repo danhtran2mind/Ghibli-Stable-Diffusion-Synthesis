@@ -103,20 +103,9 @@ cd Ghibli-Stable-Diffusion-Synthesis
 Install the required Python libraries listed in `requirements.txt`:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 
 ```
-
-### Step 3: Decrypt Encrypted Folders (if necessary)
-
-The `dataset` and `diffusers` folders are encrypted using git-crypt for security. To decrypt them, obtain the decryption key by contacting the maintainer via the [Issues tab](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/issues). Then, run:
-
-```bash
-git-crypt unlock /path/to/my-repo.asc
-
-```
-
-Replace `/path/to/my-repo.asc` with the path to your decryption key file. Ensure git-crypt is installed and configured for the repository.
 
 ## Usage
 
@@ -145,14 +134,14 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
     
 2.  **Download the Fine-Tuned Model**:
     
-    Download the model weights to the `ghibli-fine-tuned-sd-2.1` folder:
+    Download the model weights to the `ckpts` folder:
     
     ```bash
-    python scripts/download_models.py
+    python scripts/download_ckpts.py
     
     ```
     
-    The `download_model.py` script retrieves the model from the Hugging Face repository.
+    The `download_ckpts.py` script retrieves the model from the HuggingFace repository.
     
 3.  **Extract the Dataset**:
     

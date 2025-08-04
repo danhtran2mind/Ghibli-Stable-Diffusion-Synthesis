@@ -261,10 +261,7 @@ def create_demo(
             You can explore GitHub repository: 
             <a href="https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis">
                 <img src="https://img.shields.io/badge/GitHub-danhtran2mind%2FGhibli--Stable--Diffusion--Synthesis-blue?style=flat&logo=github" alt="GitHub Repo">
-            </a>.
-        </div>
-        <div style="display: flex; align-items: center; justify-content: left; gap: 8px;">
-            And you can explore HuggingFace Model Hub:
+            </a>. And you can explore HuggingFace Model Hub:
             <a href="https://huggingface.co/spaces/danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning">
                 <img src="https://img.shields.io/badge/HuggingFace-danhtran2mind%2FGhibli--Stable--Diffusion--2.1--Base--finetuning-yellow?style=flat&logo=huggingface" alt="HuggingFace Space Demo">
             </a>
