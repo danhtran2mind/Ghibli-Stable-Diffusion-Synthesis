@@ -127,13 +127,22 @@ def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/e
     
     if not ans:
         print("DEBUG: No valid examples found, using default example")
-        return [
+        return 
+    
+    return ans
+
+def get_default_example() -> List:
+    """
+    Returns a default example configuration for the Gradio app.
+    
+    Returns:
+        A list containing a default example configuration.
+    """
+    return [
         ["a serene landscape in Ghibli style", 256, 512, 50, 3.5, 42, 
          "apps/gradio_app/assets/examples/default_image.png", False, "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning", 
          None, None, None, None]
     ]
-    
-    return ans
 
 def create_demo(
     config_path: str = "configs/model_ckpts.yaml",
@@ -295,7 +304,7 @@ def create_demo(
             pil_image = Image.fromarray(image[0])
 
             if use_lora:
-                pipe.to("cpu")
+                # pipe.to("cpu")
                 del pipe
             else:
                 del vae, tokenizer, text_encoder, unet, scheduler
@@ -324,11 +333,11 @@ def create_demo(
                 status = f"Error: Image path {image_path} does not exist or is None"
             
             return (
-                prompt, height, width, num_inference_steps, guidance_scale, seed,
-                image, use_lora, finetune_model_id if not use_lora else None,
-                lora_model_id if use_lora else None, base_model_id if use_lora else None,
-                lora_rank if use_lora else None, lora_scale if use_lora else None, status
-            )
+                    prompt, height, width, num_inference_steps, guidance_scale, seed,
+                    image, use_lora, finetune_model_id if not use_lora else None,
+                    lora_model_id if use_lora else None, base_model_id if use_lora else None,
+                    None, None, status
+                )
         except Exception as e:
             print(f"DEBUG: Exception in load_example_image: {e}")
             return (
@@ -416,17 +425,19 @@ def create_demo(
                         value=base_model_id, visible=use_lora.value
                     )
                 image_path = gr.Textbox(visible=False)
-                generate_btn = gr.Button("Generate Image", variant="primary")
-                stop_btn = gr.Button("Stop Generation")
+                
 
             with gr.Column(scale=1):
                 gr.Markdown("## Generated Result")
                 output_image = gr.Image(label="Generated Image", interactive=False, height=512)
                 output_text = gr.Textbox(label="Status", interactive=False, lines=3)
-                # test_btn = gr.Button("Test Example Load")
+                
+                generate_btn = gr.Button("Generate Image", variant="primary")
+                stop_btn = gr.Button("Stop Generation")
 
-        gr.Markdown("## Try an Example")
-        examples = get_examples()
+        gr.Markdown("## Some Examples")
+        examples = get_examples(["apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
+                                 "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA"])
         gr.Examples(
             examples=examples,
             inputs=[
@@ -442,7 +453,7 @@ def create_demo(
             fn=load_example_image,
             cache_examples=False,
             label="Example Prompts and Images",
-            examples_per_page=5
+            examples_per_page=8
         )
 
         gr.Markdown(badges_text)
