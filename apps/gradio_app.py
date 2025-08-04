@@ -314,8 +314,37 @@ def create_demo(
         except Exception as e:
             return None, f"Failed to generate image: {e}"
 
-    def load_example_image(prompt, height, width, num_inference_steps, guidance_scale,
-                          seed, image_path, use_lora, finetune_model_id, lora_model_id,
+    def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale,
+                          seed, image_path, use_lora, finetune_model_id):
+        try:
+            image = None
+            status = "No image available"
+            if image_path and os.path.isfile(image_path):
+                try:
+                    image = Image.open(image_path)
+                    image.load()
+                    status = f"Loaded example image: {image_path}"
+                except Exception as e:
+                    print(f"DEBUG: Error loading image {image_path}: {e}")
+                    status = f"Error: Invalid image file {image_path}: {e}"
+            else:
+                print(f"DEBUG: Invalid or missing image_path: {image_path}")
+                status = f"Error: Image path {image_path} does not exist or is None"
+            
+            return (
+                    prompt, height, width, num_inference_steps, guidance_scale, seed,
+                    image, use_lora, finetune_model_id if not use_lora else None, status
+                )
+        except Exception as e:
+            print(f"DEBUG: Exception in load_example_image: {e}")
+            return (
+                prompt, height, width, num_inference_steps, guidance_scale, seed,
+                None, use_lora, finetune_model_id if not use_lora else None,
+                f"Error loading example: {e}"
+            )
+
+    def load_example_image_lora(prompt, height, width, num_inference_steps, guidance_scale,
+                          seed, image_path, use_lora, lora_model_id,
                           base_model_id, lora_rank, lora_scale):
         try:
             image = None
@@ -334,19 +363,21 @@ def create_demo(
             
             return (
                     prompt, height, width, num_inference_steps, guidance_scale, seed,
-                    image, use_lora, finetune_model_id if not use_lora else None,
-                    lora_model_id if use_lora else None, base_model_id if use_lora else None,
-                    None, None, status
+                    image, use_lora, lora_model_id if lora_model_id else None, 
+                    base_model_id if base_model_id else None,
+                    lora_rank if lora_rank else None, lora_scale if lora_scale else None, status
                 )
         except Exception as e:
             print(f"DEBUG: Exception in load_example_image: {e}")
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                None, use_lora, finetune_model_id if not use_lora else None,
-                lora_model_id if use_lora else None, base_model_id if use_lora else None,
-                lora_rank if use_lora else None, lora_scale if use_lora else None,
+                None, use_lora,
+                lora_model_id if lora_model_id else None, base_model_id if base_model_id else None,
+                lora_rank if lora_rank else None, lora_scale if lora_scale else None,
                 f"Error loading example: {e}"
             )
+
+
 
     badges_text = r"""
     <div style="text-align: left; font-size: 14px; display: flex; flex-direction: column; gap: 10px;">
@@ -436,24 +467,39 @@ def create_demo(
                 stop_btn = gr.Button("Stop Generation")
 
         gr.Markdown("## Some Examples")
-        examples = get_examples(["apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
-                                 "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA"])
+        examples_full_finetuning = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning")
+        examples_lora = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA")
         gr.Examples(
-            examples=examples,
+            examples=examples_full_finetuning,
             inputs=[
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                output_image, use_lora, finetune_model_path, lora_model_path, base_model_path,
+                output_image, use_lora, finetune_model_path,
+            ],
+            outputs=[
+                prompt, height, width, num_inference_steps, guidance_scale, seed,
+                output_image, use_lora, finetune_model_path, output_text
+            ],
+            fn=load_example_image_full_finetuning,
+            cache_examples=False,
+            label="Examples for Full Fine-tuning",
+            examples_per_page=4
+        )
+        gr.Examples(
+            examples=examples_lora,
+            inputs=[
+                prompt, height, width, num_inference_steps, guidance_scale, seed,
+                output_image, use_lora, lora_model_path, base_model_path,
                 lora_rank, lora_scale
             ],
             outputs=[
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                output_image, use_lora, finetune_model_path, lora_model_path,
+                output_image, use_lora, lora_model_path,
                 base_model_path, lora_rank, lora_scale, output_text
             ],
-            fn=load_example_image,
+            fn=load_example_image_lora,
             cache_examples=False,
-            label="Example Prompts and Images",
-            examples_per_page=8
+            label="Examples for LoRA",
+            examples_per_page=4
         )
 
         gr.Markdown(badges_text)
