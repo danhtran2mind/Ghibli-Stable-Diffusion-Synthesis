@@ -80,6 +80,7 @@ def get_examples(examples_dir: str = "apps/gradip_app/assets/examples/Ghibli-Sta
 def create_demo(
     model_name: str = "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
+    lora_model_path: str = "ckpts/Ghibli-Stable-Diffusion-2.1-LoRA",  # Default LoRA path
 ):
     # Convert device string to torch.device
     device = torch.device(device)
@@ -92,7 +93,7 @@ def create_demo(
     unet = UNet2DConditionModel.from_pretrained(model_name, subfolder="unet", torch_dtype=dtype).to(device)
     scheduler = PNDMScheduler.from_pretrained(model_name, subfolder="scheduler")
 
-    def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed):
+    def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed, use_lora, lora_model_path, lora_rank, lora_scale):
         if not prompt:
             return None, "Prompt cannot be empty."
         if height % 8 != 0 or width % 8 != 0:
@@ -103,11 +104,24 @@ def create_demo(
             return None, "Guidance scale must be between 1.0 and 20.0."
         if seed < 0 or seed > 4294967295:
             return None, "Seed must be between 0 and 4294967295."
+        if use_lora and (not lora_model_path or not os.path.exists(lora_model_path)):
+            return None, f"LoRA model path {lora_model_path} does not exist."
+        if use_lora and (lora_rank < 1 or lora_rank > 128):
+            return None, "LoRA rank must be between 1 and 128."
+        if use_lora and (lora_scale < 0.0 or lora_scale > 2.0):
+            return None, "LoRA scale must be between 0.0 and 2.0."
 
         batch_size = 1
         if random_seed:
             seed = torch.randint(0, 4294967295, (1,)).item()
         generator = torch.Generator(device=device).manual_seed(int(seed))
+
+        # Apply LoRA weights to UNet if enabled
+        if use_lora:
+            try:
+                unet.load_attn_procs(lora_model_path)  # Load LoRA attention processors
+            except Exception as e:
+                return None, f"Error loading LoRA weights from {lora_model_path}: {e}"
 
         text_input = tokenizer(
             [prompt], padding="max_length", max_length=tokenizer.model_max_length, truncation=True, return_tensors="pt"
@@ -160,17 +174,29 @@ def create_demo(
 
         return pil_image, f"Image generated successfully! Seed used: {seed}"
 
-    def load_example_image(prompt, height, width, num_inference_steps, guidance_scale, seed, image_path):
+    def load_example_image(prompt, height, width, num_inference_steps, guidance_scale, seed, image_path, use_lora, lora_model_path, lora_rank, lora_scale):
         """
         Load the image for the selected example and update input fields.
         """
         if image_path and Path(image_path).exists():
             try:
                 image = Image.open(image_path)
-                return prompt, height, width, num_inference_steps, guidance_scale, seed, image, f"Loaded image: {image_path}"
+                return (
+                    prompt, height, width, num_inference_steps, guidance_scale, seed, image,
+                    use_lora, lora_model_path, lora_rank, lora_scale,
+                    f"Loaded image: {image_path}"
+                )
             except Exception as e:
-                return prompt, height, width, num_inference_steps, guidance_scale, seed, None, f"Error loading image: {e}"
-        return prompt, height, width, num_inference_steps, guidance_scale, seed, None, "No image available"
+                return (
+                    prompt, height, width, num_inference_steps, guidance_scale, seed, None,
+                    use_lora, lora_model_path, lora_rank, lora_scale,
+                    f"Error loading image: {e}"
+                )
+        return (
+            prompt, height, width, num_inference_steps, guidance_scale, seed, None,
+            use_lora, lora_model_path, lora_rank, lora_scale,
+            "No image available"
+        )
 
     badges_text = r"""
     <div style="text-align: center; display: flex; justify-content: left; gap: 5px;">
@@ -195,6 +221,13 @@ def create_demo(
                     guidance_scale = gr.Slider(1.0, 20.0, 3.5, step=0.5, label="Guidance Scale")
                     seed = gr.Number(42, label="Seed (0 to 4294967295)")
                     random_seed = gr.Checkbox(label="Use Random Seed", value=False)
+                    use_lora = gr.Checkbox(label="Use LoRA Weights", value=False)
+                    lora_model_path = gr.Textbox(
+                        label="LoRA Model Path", value="ckpts/Ghibli-Stable-Diffusion-2.1-LoRA", 
+                        placeholder="Path to LoRA weights (e.g., ckpts/Ghibli-Stable-Diffusion-2.1-LoRA)"
+                    )
+                    lora_rank = gr.Slider(1, 128, 64, step=1, label="LoRA Rank")
+                    lora_scale = gr.Slider(0.0, 2.0, 0.8, step=0.1, label="LoRA Scale")
                 generate_btn = gr.Button("Generate Image")
             
             with gr.Column():
@@ -205,14 +238,14 @@ def create_demo(
         gr.Examples(
             examples=examples,
             inputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, output_image],
-            outputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, output_image, output_text],
+            outputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, output_image, use_lora, lora_model_path, lora_rank, lora_scale, output_text],
             fn=load_example_image,
             cache_examples=False
         )
 
         generate_btn.click(
             fn=generate_image,
-            inputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed],
+            inputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed, use_lora, lora_model_path, lora_rank, lora_scale],
             outputs=[output_image, output_text]
         )
 
