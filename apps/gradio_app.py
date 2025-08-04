@@ -38,7 +38,6 @@ def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/e
     Raises:
         FileNotFoundError: If a specified directory does not exist.
     """
-    print(f"DEBUG: Checking examples directory: {examples_dir}")
     
     # Convert single string to list for uniform processing
     directories = [examples_dir] if isinstance(examples_dir, str) else examples_dir
@@ -60,13 +59,10 @@ def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/e
         # Get subdirectories
         all_examples_dir = [os.path.join(dir_path, d) for d in os.listdir(dir_path) 
                            if os.path.isdir(os.path.join(dir_path, d))]
-        print(f"DEBUG: Found example directories in {dir_path}: {all_examples_dir}")
         
         for example_dir in sorted(all_examples_dir):
             config_path = os.path.join(example_dir, "config.json")
             image_path = os.path.join(example_dir, "result.png")
-            print(f"DEBUG: Processing example directory: {example_dir}")
-            print(f"DEBUG: Config path: {config_path}, Image path: {image_path}")
             
             if not os.path.isfile(config_path):
                 print(f"Error: config.json not found in {example_dir}")
@@ -78,7 +74,6 @@ def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/e
             try:
                 with open(config_path, 'r') as f:
                     example_dict = json.load(f)
-                print(f"DEBUG: Loaded config: {example_dict}")
             except (json.JSONDecodeError, IOError) as e:
                 print(f"Error reading or parsing {config_path}: {e}")
                 continue
@@ -106,7 +101,6 @@ def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/e
                     
                 try:
                     Image.open(image_path).verify()
-                    print(f"DEBUG: Image verified: {image_path}")
                 except Exception as e:
                     print(f"Error: Invalid image file {image_path}: {e}")
                     continue
@@ -146,7 +140,6 @@ def create_demo(
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ):
     model_configs = load_model_configs(config_path)
-    print("DEBUG: Loaded model_configs:", model_configs)
     
     finetune_model_id = next((mid for mid, cfg in model_configs.items() if cfg.get('type') == 'full_finetuning'), None)
     lora_model_id = next((mid for mid, cfg in model_configs.items() if cfg.get('type') == 'lora'), None)
@@ -159,7 +152,6 @@ def create_demo(
     if finetune_local_dir and os.path.exists(finetune_local_dir) and any(os.path.isfile(os.path.join(finetune_local_dir, f)) for f in os.listdir(finetune_local_dir)):
         finetune_model_path = finetune_local_dir
     else:
-        print(f"DEBUG: Local model directory for fine-tuned model '{finetune_model_id}' does not exist or is empty at '{finetune_local_dir}'. Falling back to model ID.")
         finetune_model_path = finetune_model_id
 
     lora_config = model_configs.get(lora_model_id, {})
@@ -167,7 +159,6 @@ def create_demo(
     if lora_local_dir and os.path.exists(lora_local_dir) and any(os.path.isfile(os.path.join(lora_local_dir, f)) for f in os.listdir(lora_local_dir)):
         lora_model_path = lora_local_dir
     else:
-        print(f"DEBUG: Local model directory for LoRA model '{lora_model_id}' does not exist or is empty at '{lora_local_dir}'. Falling back to model ID.")
         lora_model_path = lora_model_id
 
     base_model_id = lora_config.get('base_model_id', 'stabilityai/stable-diffusion-2-1')
@@ -176,7 +167,6 @@ def create_demo(
     if base_local_dir and os.path.exists(base_local_dir) and any(os.path.isfile(os.path.join(base_local_dir, f)) for f in os.listdir(base_local_dir)):
         base_model_path = base_local_dir
     else:
-        print(f"DEBUG: Local model directory for base model '{base_model_id}' does not exist or is empty at '{base_local_dir}'. Falling back to model ID.")
         base_model_path = base_model_id
 
     device = torch.device(device)
@@ -187,13 +177,12 @@ def create_demo(
     base_model_ids = [model_configs[mid].get('base_model_id') for mid in model_configs if model_configs[mid].get('base_model_id')]
 
     def update_model_path_visibility(use_lora):
-        print(f"DEBUG: Updating model path visibility: use_lora={use_lora}")
         if use_lora:
             return gr.update(visible=True), gr.update(visible=True), gr.update(visible=False), gr.update(visible=True), gr.update(visible=True)
         return gr.update(visible=False), gr.update(visible=False), gr.update(visible=True), gr.update(visible=False), gr.update(visible=False)
     
     def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed, use_lora, finetune_model_id, lora_model_id, base_model_id, lora_rank, lora_scale):
-        print(f"DEBUG: Starting generate_image with prompt={prompt}, use_lora={use_lora}")
+        
         try:
             model_configs = load_model_configs(config_path)
             finetune_config = model_configs.get(finetune_model_id, {})
@@ -314,25 +303,19 @@ def create_demo(
 
             return pil_image, f"Generated image successfully! Seed used: {seed}"
         except Exception as e:
-            print(f"DEBUG: Error in generate_image: {e}")
             return None, f"Failed to generate image: {e}"
 
     def load_example_image(prompt, height, width, num_inference_steps, guidance_scale,
                           seed, image_path, use_lora, finetune_model_id, lora_model_id,
                           base_model_id, lora_rank, lora_scale):
-        print(f"DEBUG: Inputs: prompt={prompt}, image_path={image_path}, use_lora={use_lora}")
-        print(f"DEBUG: All inputs: {locals()}")
-        
         try:
             image = None
             status = "No image available"
             if image_path and os.path.isfile(image_path):
-                print(f"DEBUG: Loading image from {image_path}")
                 try:
                     image = Image.open(image_path)
                     image.load()
                     status = f"Loaded example image: {image_path}"
-                    print(f"DEBUG: Image loaded successfully")
                 except Exception as e:
                     print(f"DEBUG: Error loading image {image_path}: {e}")
                     status = f"Error: Invalid image file {image_path}: {e}"
@@ -340,7 +323,6 @@ def create_demo(
                 print(f"DEBUG: Invalid or missing image_path: {image_path}")
                 status = f"Error: Image path {image_path} does not exist or is None"
             
-            print(f"DEBUG: Returning outputs: image={image is not None}, status={status}")
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
                 image, use_lora, finetune_model_id if not use_lora else None,
