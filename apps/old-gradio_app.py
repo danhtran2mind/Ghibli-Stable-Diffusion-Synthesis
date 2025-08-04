@@ -11,7 +11,7 @@ from diffusers import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
 from tqdm import tqdm
 from transformers import HfArgumentParser
 
-def get_examples(examples_dir: str = "apps/gradip_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning") -> list:
+def get_examples(examples_dir: str = "apps/gradip_app/assets/examples/ghibli-fine-tuned-sd-2.1") -> list:
     """
     Load example data from the assets/examples directory.
     Each example is a subdirectory containing a config.json and an image file.
@@ -78,7 +78,7 @@ def get_examples(examples_dir: str = "apps/gradip_app/assets/examples/Ghibli-Sta
     return ans
 
 def create_demo(
-    model_name: str = "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
+    model_name: str = "danhtran2mind/ghibli-fine-tuned-sd-2.1",
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ):
     # Convert device string to torch.device
@@ -174,7 +174,7 @@ def create_demo(
 
     badges_text = r"""
     <div style="text-align: center; display: flex; justify-content: left; gap: 5px;">
-    <a href="https://huggingface.co/spaces/danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"><img src="https://img.shields.io/static/v1?label=%F0%9F%A4%97%20Hugging%20Face&message=Space&color=orange"></a>
+    <a href="https://huggingface.co/spaces/danhtran2mind/ghibli-fine-tuned-sd-2.1"><img src="https://img.shields.io/static/v1?label=%F0%9F%A4%97%20Hugging%20Face&message=Space&color=orange"></a>
     </div>
     """.strip()
 
@@ -201,7 +201,7 @@ def create_demo(
                 output_image = gr.Image(label="Generated Image")
                 output_text = gr.Textbox(label="Status")
 
-        examples = get_examples("assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning")
+        examples = get_examples("assets/examples/ghibli-fine-tuned-sd-2.1")
         gr.Examples(
             examples=examples,
             inputs=[prompt, height, width, num_inference_steps, guidance_scale, seed, output_image],
@@ -229,10 +229,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model_name",
         type=str,
-        default="danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
+        default="danhtran2mind/ghibli-fine-tuned-sd-2.1",
         help="Model name or path for the fine-tuned Stable Diffusion model."
     )
-    
     parser.add_argument(
         "--device",
         type=str,
@@ -256,7 +255,7 @@ if __name__ == "__main__":
 
     # Set model_name based on local_model flag
     if args.local_model:
-        args.model_name = "./ckpts/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
+        args.model_name = "./checkpoints/ghibli-fine-tuned-sd-2.1"
 
     demo = create_demo(args.model_name, args.device)
     demo.launch(server_port=args.port, share=args.share)
