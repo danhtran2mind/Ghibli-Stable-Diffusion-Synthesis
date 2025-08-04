@@ -5,5 +5,7 @@
     "num_inference_steps": 100,
     "guidance_scale": 5.0,
     "seed": 10,
-    "image": "result.png"
+    "image": "result.png",
+    "use_lora": false,
+    "finetune_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
 }

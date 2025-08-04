@@ -143,32 +143,8 @@ To generate Ghibli-style images using the Gradio demo, follow these steps:
     
     The `download_ckpts.py` script retrieves the model from the HuggingFace repository.
     
-3.  **Extract the Dataset**:
-    
-    Download and extract the Ghibli dataset to the `dataset` folder:
-    
-    ```bash
-    cd dataset
-    pip install datasets
-    python extract_files.py
-    cd ..
-    
-    ```
-        
-4.  **Extract the Diffusers Folder**:
-    
-    Extract the model weights or related files in the `diffusers` folder:
-    
-    ```bash
-    cd diffusers
-    python extract_files.py
-    cd ..
-    
-    ```
-    
-    The `extract_files.py` script handles the extraction process.
-    
-5.  **Run the Gradio App**:
+
+3.  **Run the Gradio App**:
     
     Launch the Gradio demo to interact with the model:
     
