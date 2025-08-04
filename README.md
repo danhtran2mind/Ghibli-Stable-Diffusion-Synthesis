@@ -67,9 +67,13 @@ To get started, open the notebook in your preferred platform and follow the inst
 
 The project utilizes the [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset) from Hugging Face, a carefully curated collection of images from Studio Ghibli films. This dataset encapsulates the unique visual style of Ghibli, featuring vibrant colors, intricate landscapes, and whimsical characters, making it ideal for fine-tuning the model.
 
+[Ghibli Dataset](https://huggingface.co/datasets/pulnip/ghibli-dataset)
+
 ## Base Model
 
 The fine-tuning process is built upon the [Stable Diffusion 2.1 Base](https://huggingface.co/stabilityai/stable-diffusion-2-1-base) model by Stability AI. This robust text-to-image model provides a solid foundation, enabling high-fidelity image generation with targeted fine-tuning to achieve the Ghibli aesthetic.
+
+[Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1)
 
 ## Demonstration
 
