@@ -6,6 +6,6 @@
 
 - platform: "HuggingFace"
   model_id: "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
-  local_dir: "ckpts/danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
+  local_dir: "ckpts/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
   base_model_id: "stabilityai/stable-diffusion-2-1-base"
   type: "full-finetuning"
