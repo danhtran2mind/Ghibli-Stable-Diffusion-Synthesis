@@ -3,7 +3,7 @@ import argparse
 import yaml
 from huggingface_hub import snapshot_download
 
-def download_model_checkpoint(repo_id, local_dir, token=None):
+def download_model_checkpoint(repo_id, local_dir, token=None, ignore_patterns=None):
     """
     Download a Hugging Face model checkpoint to a specified local directory.
 
@@ -11,6 +11,7 @@ def download_model_checkpoint(repo_id, local_dir, token=None):
         repo_id (str): The Hugging Face repository ID (e.g., 'stabilityai/stable-diffusion-2-1').
         local_dir (str): The local directory to store the downloaded checkpoint files.
         token (str, optional): Hugging Face API token for accessing private or gated repositories.
+        ignore_patterns (list, optional): List of file patterns to exclude from downloading.
     """
     try:
         os.makedirs(local_dir, exist_ok=True)
@@ -20,7 +21,8 @@ def download_model_checkpoint(repo_id, local_dir, token=None):
             local_dir_use_symlinks=False,
             repo_type="model",
             token=token,
-            allow_patterns=["*.safetensors", "*.ckpt", "*.json", "*.txt"]
+            allow_patterns=["*.safetensors", "*.ckpt", "*.json", "*.txt"],
+            ignore_patterns=ignore_patterns  # Pass ignore_patterns to exclude specified files
         )
         print(f"Successfully downloaded model checkpoint from {repo_id} to {local_dir}")
     except Exception as e:
@@ -82,10 +84,12 @@ if __name__ == "__main__":
         for config in model_configs:
             repo_id = config.get("model_id")
             local_dir = config.get("local_dir")
+            ignore_patterns = config.get("no_download_path")  # Get the no_download_path field
             if not repo_id or not local_dir:
                 print(f"Skipping invalid configuration entry: missing model_id or local_dir")
                 continue
-            download_model_checkpoint(repo_id, local_dir, args.token)
+            print(f"Downloading model checkpoint from {repo_id} to {local_dir}...")
+            download_model_checkpoint(repo_id, local_dir, args.token, ignore_patterns)
 
     except FileNotFoundError:
         print(f"Error: Configuration file '{args.config}' not found.")
