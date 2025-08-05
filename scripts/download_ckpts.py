@@ -3,80 +3,95 @@ import argparse
 import yaml
 from huggingface_hub import snapshot_download
 
-def download_repository(repo_id, local_dir, token=None):
+def download_model_checkpoint(repo_id, local_dir, token=None):
     """
-    Download a Hugging Face repository to a local directory using snapshot_download.
-    
-    Args:
-        repo_id (str): Hugging Face repository ID.
-        local_dir (str): Local directory to save the downloaded files.
-        token (str, optional): Hugging Face API token for private/gated repositories.
-    """
-    os.makedirs(local_dir, exist_ok=True)
+    Download a Hugging Face model checkpoint to a specified local directory.
 
+    Args:
+        repo_id (str): The Hugging Face repository ID (e.g., 'stabilityai/stable-diffusion-2-1').
+        local_dir (str): The local directory to store the downloaded checkpoint files.
+        token (str, optional): Hugging Face API token for accessing private or gated repositories.
+    """
     try:
+        os.makedirs(local_dir, exist_ok=True)
         snapshot_download(
             repo_id=repo_id,
             local_dir=local_dir,
             local_dir_use_symlinks=False,
             repo_type="model",
-            token=token if token else None,
+            token=token,
             allow_patterns=["*.safetensors", "*.ckpt", "*.json", "*.txt"]
         )
-        print(f"Successfully downloaded all files from {repo_id} to {local_dir}")
+        print(f"Successfully downloaded model checkpoint from {repo_id} to {local_dir}")
     except Exception as e:
-        print(f"Error downloading repository {repo_id}: {str(e)}")
+        print(f"Failed to download model checkpoint from {repo_id}: {str(e)}")
+
+def load_config(config_path):
+    """
+    Load and validate the YAML configuration file.
+
+    Args:
+        config_path (str): Path to the YAML configuration file.
+
+    Returns:
+        list: List of model configurations for HuggingFace platform.
+
+    Raises:
+        FileNotFoundError: If the configuration file does not exist.
+        yaml.YAMLError: If the YAML file is invalid.
+        ValueError: If the YAML file is empty or contains no valid HuggingFace entries.
+    """
+    with open(config_path, "r") as file:
+        config_data = yaml.safe_load(file)
+
+    if not config_data:
+        raise ValueError("The YAML configuration file is empty or invalid")
+
+    # Filter for HuggingFace platform entries
+    huggingface_configs = [item for item in config_data if item.get("platform") == "HuggingFace"]
+    
+    if not huggingface_configs:
+        raise ValueError("No valid HuggingFace platform entries found in the YAML configuration")
+
+    return huggingface_configs
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Download Hugging Face repositories to local directories.")
+    """
+    Main function to parse arguments and download model checkpoints based on the YAML configuration.
+    """
+    parser = argparse.ArgumentParser(description="Download Hugging Face model checkpoints specified in a YAML configuration file.")
     parser.add_argument(
         "--config",
         type=str,
         default="configs/model_ckpts.yaml",
-        help="Path to the YAML configuration file containing model IDs and local directories"
+        help="Path to the YAML configuration file specifying model IDs and local directories."
     )
     parser.add_argument(
         "--token",
         type=str,
         default=None,
-        help="Hugging Face API token for private or gated repositories (optional)"
+        help="Hugging Face API token for accessing private or gated repositories (optional)."
     )
-
     args = parser.parse_args()
 
-    # Load the YAML configuration file
     try:
-        with open(args.config, "r") as f:
-            config_data = yaml.safe_load(f)
-        
-        if not config_data:
-            raise ValueError("The YAML file is empty or invalid")
+        # Load and validate the configuration
+        model_configs = load_config(args.config)
 
-        # Extract repo_ids and local_dirs for HuggingFace platform only
-        repo_ids = []
-        local_dirs = []
-        for item in config_data:
-            if item.get("platform") == "HuggingFace":
-                repo_ids.append(item["model_id"])
-                local_dirs.append(item["local_dir"])
+        # Download each model checkpoint
+        for config in model_configs:
+            repo_id = config.get("model_id")
+            local_dir = config.get("local_dir")
+            if not repo_id or not local_dir:
+                print(f"Skipping invalid configuration entry: missing model_id or local_dir")
+                continue
+            download_model_checkpoint(repo_id, local_dir, args.token)
 
-        # Validate that at least one valid entry was found
-        if not repo_ids or not local_dirs:
-            raise ValueError("No valid HuggingFace platform entries found in the YAML file")
-
-        # Validate that the number of repo_ids matches the number of local_dirs
-        if len(repo_ids) != len(local_dirs):
-            raise ValueError("The number of model_ids must match the number of local_dirs for HuggingFace platform")
-
-        # Download each repository
-        for repo_id, local_dir in zip(repo_ids, local_dirs):
-            download_repository(repo_id, local_dir, args.token)
-            
     except FileNotFoundError:
-        print(f"Error: The configuration file '{args.config}' was not found.")
+        print(f"Error: Configuration file '{args.config}' not found.")
     except yaml.YAMLError as e:
-        print(f"Error: Failed to parse YAML file. Details: {e}")
-    except KeyError as e:
-        print(f"Error: Missing expected key in YAML data. Details: {e}")
+        print(f"Error: Failed to parse YAML configuration file. Details: {str(e)}")
     except ValueError as e:
-        print(f"Error: {e}")
+        print(f"Error: {str(e)}")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")

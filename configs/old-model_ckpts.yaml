@@ -9,14 +9,3 @@
   base_model_id: "stabilityai/stable-diffusion-2-1-base"
   type: "full_finetuning"
   platform: "HuggingFace"
-
-- model_id: stabilityai/stable-diffusion-2-1
-  local_dir: ckpts/stable-diffusion-2-1
-  type: "base"
-  platform: "HuggingFace"
-  
-# - model_id: stabilityai/stable-diffusion-2-1-base
-#   local_dir: ckpts/stable-diffusion-2-1-base
-#   type: "base"
-#   platform: "HuggingFace"
-  

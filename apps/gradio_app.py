@@ -344,37 +344,36 @@ def create_demo(
             )
 
     def load_example_image_lora(prompt, height, width, num_inference_steps, guidance_scale,
-                          seed, image_path, use_lora, lora_model_id,
-                          base_model_id, lora_rank, lora_scale):
+                           seed, image_path, use_lora, lora_model_id,
+                           base_model_id, lora_rank, lora_scale):
         try:
             image = None
             status = "No image available"
-            if image_path and os.path.isfile(image_path):
-                try:
-                    image = Image.open(image_path)
-                    image.load()
-                    status = f"Loaded example image: {image_path}"
-                except Exception as e:
-                    print(f"DEBUG: Error loading image {image_path}: {e}")
-                    status = f"Error: Invalid image file {image_path}: {e}"
+            if image_path and Path(image_path).is_file():
+                image = Image.open(image_path)
+                image.load()
+                status = f"Loaded example image: {image_path}"
             else:
-                print(f"DEBUG: Invalid or missing image_path: {image_path}")
                 status = f"Error: Image path {image_path} does not exist or is None"
             
-            return (
-                    prompt, height, width, num_inference_steps, guidance_scale, seed,
-                    image, use_lora, lora_model_id if lora_model_id else None, 
-                    base_model_id if base_model_id else None,
-                    lora_rank if lora_rank else None, lora_scale if lora_scale else None, status
-                )
-        except Exception as e:
-            print(f"DEBUG: Exception in load_example_image: {e}")
+            # Ensure base_model_id and lora_scale have valid values
+            base_model_id = base_model_id or "stabilityai/stable-diffusion-2-1"
+            lora_scale = lora_scale if lora_scale is not None else 1.2
+            
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                None, use_lora,
-                lora_model_id if lora_model_id else None, base_model_id if base_model_id else None,
-                lora_rank if lora_rank else None, lora_scale if lora_scale else None,
-                f"Error loading example: {e}"
+                image, use_lora, lora_model_id, base_model_id,
+                lora_rank, lora_scale, status,
+                gr.update(visible=True),  # Make lora_scale Slider visible
+                gr.update(value=base_model_id, visible=True)  # Update base_model_path Dropdown
+                )
+        except Exception as e:
+            print(f"DEBUG: Exception in load_example_image_lora: {e}")
+            return (
+                prompt, height, width, num_inference_steps, guidance_scale, seed,
+                None, use_lora, lora_model_id, base_model_id or "stabilityai/stable-diffusion-2-1",
+                lora_rank, lora_scale if lora_scale is not None else 1.2, f"Error loading example: {e}",
+                gr.update(visible=True), gr.update(value=base_model_id or "stabilityai/stable-diffusion-2-1", visible=True)
             )
 
 
@@ -397,7 +396,9 @@ def create_demo(
     </div>
     """.strip()
 
-    with gr.Blocks() as demo:
+    custom_css = open("apps/gradio_app/static/styles.css", "r").read()
+
+    with gr.Blocks(css=custom_css, theme="ocean") as demo:
         with gr.Row():
             with gr.Column(scale=1):
                 gr.Markdown("## Image Generation Settings")
@@ -418,7 +419,7 @@ def create_demo(
                 with gr.Accordion("Advanced Settings", open=False):
                     num_inference_steps = gr.Slider(
                         minimum=1, maximum=100, value=50, step=1, label="Inference Steps",
-                        info="Higher steps improve quality but increase generation time."
+                        info="More steps, better quality, longer wait."
                     )
                     guidance_scale = gr.Slider(
                         minimum=1.0, maximum=20.0, value=3.5, step=0.5, label="Guidance Scale",
@@ -435,12 +436,12 @@ def create_demo(
                     random_seed = gr.Checkbox(label="Use Random Seed", value=False)
                     seed = gr.Slider(
                         minimum=0, maximum=4294967295, value=42, step=1,
-                        label="Seed (0–4294967295)", info="Set a specific seed for reproducible results."
+                        label="Seed", info="Use a seed (0-4294967295) for consistent results."
                     )
                 with gr.Group():
                     gr.Markdown("### Model Configuration")
                     use_lora = gr.Checkbox(
-                        label="Use LoRA Weights", value=False,
+                        label="Use LoRA", value=False,
                         info="Enable to use LoRA weights with a base model."
                     )
                     finetune_model_path = gr.Dropdown(
