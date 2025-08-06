@@ -2,8 +2,9 @@ import os
 import sys
 import torch
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..' 
-                                             'src', 'ghibli_stable_diffusion_synthesis')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 
+                                             'src', 'ghibli_stable_diffusion_synthesis', 
+                                             'inference')))
 
 from inference.full_finetuning import inference_process as full_finetuning_inference
 from inference.lora import inference_process as lora_inference
