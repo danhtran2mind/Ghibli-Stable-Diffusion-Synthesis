@@ -32,14 +32,14 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
     # Model path
     all_model_config = yaml.safe_load(open(config_path, "r"))
     model_config = next((config for config in all_model_config if config['model_id'] == model_id), None)
-    base_model = (
+    lora_model = (
         model_config['local_dir']
         if os.path.exists(model_config['local_dir']) and any(os.scandir(model_config['local_dir']))
         else model_config['model_id']
     )
 
     # base_model = "stabilityai/stable-diffusion-2-1"
-    lora_model = next(
+    base_model = next(
         (
             element["local_dir"]
             for element in all_model_config
