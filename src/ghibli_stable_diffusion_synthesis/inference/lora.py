@@ -63,11 +63,12 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
 
     # Define LoRA configuration with lora_rank
     lora_rank = 64
+    lora_alpha = 32
     unet_lora_config = LoraConfig(
         r=lora_rank,
-        # lora_alpha=args.rank,
-        # init_lora_weights="gaussian",
-        # target_modules=["to_k", "to_q", "to_v", "to_out.0"],
+        lora_alpha=lora_alpha,
+        init_lora_weights="gaussian",
+        target_modules=["to_k", "to_q", "to_v", "to_out.0"],
     )
 
     # Load LoRA weights with lora_scale
