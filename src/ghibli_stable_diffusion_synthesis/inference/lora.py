@@ -18,17 +18,21 @@ def inference_process(
     lora_scale,
     config_path="configs/model_ckpts.yaml",
     model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+    # base_model_id=None,
+    device=None,
+    dtype=torch.float16
 ):
-    # Set device and dtype
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        dtype = torch.float16
-    elif torch.backends.mps.is_available():
-        device = torch.device("mps")
-        dtype = torch.float32
-    else:
-        device = torch.device("cpu")
-        dtype = torch.float32
+    if not device:
+        # Set device and dtype
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+            dtype = torch.float16
+        elif torch.backends.mps.is_available():
+            device = torch.device("mps")
+            dtype = torch.float32
+        else:
+            device = torch.device("cpu")
+            dtype = torch.float32
 
     # Model paths
     all_model_config = yaml.safe_load(open(config_path, "r"))
@@ -38,6 +42,8 @@ def inference_process(
         if os.path.exists(model_config["local_dir"]) and any(os.scandir(model_config["local_dir"]))
         else model_config["model_id"]
     )
+
+    # if not base_model_id:
     base_model = next(
         (
             element["local_dir"]

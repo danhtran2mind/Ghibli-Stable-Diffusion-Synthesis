@@ -10,18 +10,20 @@ import yaml
 def inference_process(prompt, height, width, num_inference_steps,
                       guidance_scale, batch_size, seed,
                       config_path="configs/model_ckpts.yaml",
-                      model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"):
-    # Set device and dtype
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        dtype = torch.float16
-    elif torch.backends.mps.is_available():
-        device = torch.device("mps")
-        dtype = torch.float32
-    else:
-        device = torch.device("cpu")
-        dtype = torch.float32
-
+                      model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
+                      device=None, dtype=torch.float16):
+    if not device:
+        # Set device and dtype
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+            dtype = torch.float16
+        elif torch.backends.mps.is_available():
+            device = torch.device("mps")
+            dtype = torch.float32
+        else:
+            device = torch.device("cpu")
+            dtype = torch.float32
+            
     # Model path
     all_model_config = yaml.safe_load(open(config_path, "r"))
     model_config = next((config for config in all_model_config if config['model_id'] == model_id), None)

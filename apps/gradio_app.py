@@ -22,7 +22,9 @@ def main():
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--share", action="store_true")
     args = parser.parse_args()
-
+    print("Running setup script...")
+    run_setup_script()
+    print("Starting Gradio app...")
     model_configs = load_model_configs(args.config_path)
     demo = create_gui(model_configs, args.device)
     demo.launch(server_port=args.port, share=args.share)
