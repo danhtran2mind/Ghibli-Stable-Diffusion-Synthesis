@@ -40,9 +40,9 @@ def create_gui(model_configs, device):
                         prompt_ft = gr.Textbox(label="Prompt", placeholder="e.g., 'a serene landscape in Ghibli style'", lines=2)
                         with gr.Group():
                             gr.Markdown("#### Image Dimensions")
-                            with gr.Row():
-                                width_ft = gr.Slider(32, 4096, 512, step=8, label="Width")
+                            with gr.Row():                                
                                 height_ft = gr.Slider(32, 4096, 512, step=8, label="Height")
+                                width_ft = gr.Slider(32, 4096, 512, step=8, label="Width")
                         with gr.Accordion("Advanced Settings", open=False):
                             num_inference_steps_ft = gr.Slider(1, 100, 50, step=1, label="Inference Steps")
                             guidance_scale_ft = gr.Slider(1.0, 20.0, 3.5, step=0.5, label="Guidance Scale")
@@ -69,8 +69,8 @@ def create_gui(model_configs, device):
                         with gr.Group():
                             gr.Markdown("#### Image Dimensions")
                             with gr.Row():
-                                width_lora = gr.Slider(32, 4096, 512, step=8, label="Width")
                                 height_lora = gr.Slider(32, 4096, 512, step=8, label="Height")
+                                width_lora = gr.Slider(32, 4096, 512, step=8, label="Width")
                         with gr.Accordion("Advanced Settings", open=False):
                             num_inference_steps_lora = gr.Slider(1, 100, 50, step=1, label="Inference Steps")
                             guidance_scale_lora = gr.Slider(1.0, 20.0, 3.5, step=0.5, label="Guidance Scale")

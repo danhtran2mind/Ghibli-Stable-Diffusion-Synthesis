@@ -24,6 +24,8 @@ def parse_args():
                         help="Scaling factor for LoRA weights")
     parser.add_argument("--config_path", type=str, default="configs/model_ckpts.yaml", 
                         help="Path to the model configuration YAML file")
+    parser.add_argument("--output_path", type=str, default="test_data/ghibli_style_{method}_output.png", 
+                        help="Path to save the output image")
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -54,4 +56,4 @@ if __name__ == "__main__":
             config_path=args.config_path,
             model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA"
         )
-    pil_image.save(f"test_data/ghibli_style_{args.method}_output.png")
+    pil_image.save(args.output_path.format(method=args.method))

@@ -16,19 +16,21 @@ This guide describes the command-line arguments for the `infer.py` script, which
 | `--seed`                | Integer| `42`                                       | Random seed for reproducibility.                                           |
 | `--lora_scale`          | Float  | `1.2`                                      | Scaling factor for LoRA weights (applicable when using LoRA method).        |
 | `--config_path`         | String | `"configs/model_ckpts.yaml"`               | Path to the model configuration YAML file.                                  |
+| `--output_path`         | String | `"test_data/ghibli_style_{method}_output.png"`               | Path to save the output image.                                  |
+
 
 ## Usage Example
 
-To run inference with full fine-tuning:
+- To run inference with full fine-tuning:
 ```bash
 python infer.py --method full_finetuning --prompt "donald trump in ghibli style" --height 512 --width 512 --num_inference_steps 50 --guidance_scale 3.5 --batch_size 1 --seed 42 --config_path configs/model_ckpts.yaml
 ```
-
-To run inference with LoRA:
+  The output_path is `tests/test_data/ghibli_style_output_full_finetuning.png`.
+- To run inference with LoRA:
 ```bash
 python infer.py --method lora --prompt "donald trump in ghibli style" --height 512 --width 512 --num_inference_steps 50 --guidance_scale 3.5 --batch_size 1 --seed 42 --lora_scale 1.2 --config_path configs/model_ckpts.yaml
 ```
-
+  The output_path is `tests/test_data/ghibli_style_output_lora.png`.
 ## Notes
 - The output image is saved as `test_data/ghibli_style_{method}_output.png`, where `{method}` is either `full_finetuning` or `lora`.
 - Ensure the `--height` and `--width` values are divisible by 8 to avoid errors in the Stable Diffusion pipeline.
