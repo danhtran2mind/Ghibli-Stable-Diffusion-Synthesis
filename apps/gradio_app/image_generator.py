@@ -2,7 +2,7 @@ import os
 import sys
 import torch
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..' 
                                              'src', 'ghibli_stable_diffusion_synthesis')))
 
 from inference.full_finetuning import inference_process as full_finetuning_inference
