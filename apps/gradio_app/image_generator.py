@@ -20,9 +20,9 @@ def generate_image(prompt, height, width, num_inference_steps, guidance_scale, s
 
     model_configs = load_model_configs(config_path)
     finetune_model_path = model_configs.get(finetune_model_id, {}).get('local_dir', finetune_model_id)
-    base_model_path = model_configs.get(lora_model_id, {}).get('local_dir', lora_model_id)
-    lora_model_path = model_configs.get(base_model_id, {}).get('local_dir', base_model_id)
-    # base_model_path lora_model_path
+    lora_model_path = model_configs.get(lora_model_id, {}).get('local_dir', lora_model_id)
+    base_model_path = model_configs.get(base_model_id, {}).get('local_dir', base_model_id)
+    
     generator = torch.Generator(device=device).manual_seed(torch.randint(0, 4294967295, (1,)).item() if random_seed else int(seed))
 
     try:

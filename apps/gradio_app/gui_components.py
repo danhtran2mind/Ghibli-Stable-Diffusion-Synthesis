@@ -30,8 +30,8 @@ def create_gui(model_configs, device):
 
     with gr.Blocks(css=custom_css, theme="ocean") as demo:
         gr.Markdown("# Ghibli Stable Diffusion Synthesis")
-        gr.Markdown(intro_markdown_1)
-        gr.Markdown(intro_markdown_2)
+        gr.HTML(intro_markdown_1)
+        gr.HTML(intro_markdown_2)
         with gr.Tabs():
             with gr.Tab(label="Full Finetuning"):
                 with gr.Row():
@@ -91,7 +91,7 @@ def create_gui(model_configs, device):
                             outputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_scale_lora, output_text_lora], 
                             fn=load_example_image_lora, cache_examples=False, examples_per_page=4)
 
-        gr.Markdown(outro_markdown_1)
+        gr.HTML(outro_markdown_1)
 
         generate_event_ft = generate_btn_ft.click(
             fn=generate_image, 
