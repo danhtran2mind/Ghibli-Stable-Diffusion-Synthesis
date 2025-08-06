@@ -63,19 +63,16 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
 
     # Define LoRA configuration with lora_rank
     lora_rank = 64
-    lora_config = LoraConfig(
-        r=lora_rank,  # Explicitly set LoRA rank
-        # lora_alpha=32,  # Scaling factor, typically 2*rank
-        # target_modules=["to_k", "to_q", "to_v", "to_out.0"],  # Attention layers
-        # lora_dropout=0.1,  # Dropout for LoRA
-        # bias="none"  # No bias for inference
+    unet_lora_config = LoraConfig(
+        r=lora_rank,
+        # lora_alpha=args.rank,
+        # init_lora_weights="gaussian",
+        # target_modules=["to_k", "to_q", "to_v", "to_out.0"],
     )
-    pipe.unet.add_adapter(lora_config)
 
     # Load LoRA weights with lora_scale
     pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=0.8)
     pipe.unet.load_attn_procs(lora_model)  # Load LoRA attention processors
-
 
     # Move pipeline to device
     pipe = pipe.to(device)
@@ -86,6 +83,9 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
     text_encoder = pipe.text_encoder
     unet = pipe.unet
     scheduler = PNDMScheduler.from_config(pipe.scheduler.config)
+
+    # Add LoRA Rank adapter to UNet
+    unet.add_adapter(unet_lora_config)
 
     # Validate height and width
     if height % 8 != 0 or width % 8 != 0:
