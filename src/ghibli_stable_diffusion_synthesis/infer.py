@@ -54,7 +54,7 @@ if __name__ == "__main__":
             guidance_scale=args.guidance_scale,
             batch_size=args.batch_size,
             seed=args.seed,
-            lora_rank=
+            lora_rank=args.lora_rank,
             lora_scale=args.lora_scale,
             config_path=args.config_path,
             model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA"

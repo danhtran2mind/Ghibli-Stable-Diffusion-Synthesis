@@ -11,3 +11,4 @@ diffusers==0.33.1
 peft==0.15.0
 gradio==5.29.0
 numpy==1.26.4
+peft==0.15.0
