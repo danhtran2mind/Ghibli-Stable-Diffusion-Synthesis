@@ -7,17 +7,17 @@
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
-    --border-radius: 8px;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --border-radius: 0.5rem; /* Relative unit */
+    --shadow-sm: 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 0, 0, 0.1);
 }
 
 /* Container Styles */
 .gradio-container {
-    max-width: 1200px !important;
+    max-width: 75rem !important; /* Relative to viewport */
     margin: 0 auto !important;
-    padding: 20px !important;
+    padding: 1.25rem !important; /* Relative padding */
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif !important;
 }
 
@@ -26,8 +26,8 @@
     background: var(--block-background-fill) !important;
     border-radius: var(--border-radius) !important;
     box-shadow: var(--shadow-md) !important;
-    border: 1px solid var(--border-color-primary) !important;
-    backdrop-filter: blur(10px) !important;
+    border: 0.0625rem solid var(--border-color-primary) !important;
+    backdrop-filter: blur(0.625rem) !important;
 }
 
 /* Button Styles */
@@ -35,46 +35,33 @@ button.primary {
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color)) !important;
     border: none !important;
     border-radius: var(--border-radius) !important;
-    padding: 10px 20px !important;
+    padding: 0.625rem 1.25rem !important; /* Relative padding */
     font-weight: 600 !important;
+    font-size: 1rem !important; /* Relative font size */
     transition: all 0.3s ease !important;
     box-shadow: var(--shadow-sm) !important;
 }
 
 button.primary:hover {
     background: linear-gradient(135deg, var(--primary-hover), var(--accent-hover)) !important;
-    transform: translateY(-1px) !important;
+    transform: translateY(-0.0625rem) !important;
     box-shadow: var(--shadow-md) !important;
 }
 
 button.secondary {
     background: transparent !important;
-    border: 1px solid var(--border-color-primary) !important;
+    border: 0.0625rem solid var(--border-color-primary) !important;
     border-radius: var(--border-radius) !important;
     color: var(--body-text-color) !important;
     font-weight: 500 !important;
+    font-size: 0.875rem !important; /* Relative font size */
 }
-
-/* Input Styles */
-/* input, textarea, select {
-    border-radius: var(--border-radius) !important;
-    border: 1px solid var(--border-color-primary) !important;
-    background: var(--input-background-fill) !important;
-    color: var(--body-text-color) !important;
-    transition: all 0.2s ease !important;
-} */
-
-/* input:focus, textarea:focus, select:focus {
-    border-color: var(--primary-color) !important;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
-    outline: none !important;
-} */
 
 /* Slider Styles */
 .slider_input_container input[type="range"][name="cowbell"] {
     -webkit-appearance: none !important;
     width: 100% !important;
-    height: 8px !important;
+    height: 0.5rem !important; /* Relative height */
     border-radius: var(--border-radius) !important;
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color)) !important;
     outline: none !important;
@@ -82,13 +69,13 @@ button.secondary {
 
 .slider_input_container input[type="range"][name="cowbell"]::-webkit-slider-thumb {
     -webkit-appearance: none !important;
-    width: 16px !important;
-    height: 16px !important;
+    width: 1rem !important; /* Relative size */
+    height: 1rem !important;
     border-radius: 50% !important;
     background: var(--accent-color) !important;
     cursor: pointer !important;
     box-shadow: var(--shadow-sm) !important;
-    border: 1px solid var(--border-color-primary) !important;
+    border: 0.0625rem solid var(--border-color-primary) !important;
 }
 
 .slider_input_container input[type="range"][name="cowbell"]::-webkit-slider-thumb:hover {
@@ -97,19 +84,19 @@ button.secondary {
 }
 
 .slider_input_container input[type="range"][name="cowbell"]::-moz-range-track {
-    height: 8px !important;
+    height: 0.5rem !important; /* Relative height */
     border-radius: var(--border-radius) !important;
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color)) !important;
 }
 
 .slider_input_container input[type="range"][name="cowbell"]::-moz-range-thumb {
-    width: 16px !important;
-    height: 16px !important;
+    width: 1rem !important; /* Relative size */
+    height: 1rem !important;
     border-radius: 50% !important;
     background: var(--accent-color) !important;
     cursor: pointer !important;
     box-shadow: var(--shadow-sm) !important;
-    border: 1px solid var(--border-color-primary) !important;
+    border: 0.0625rem solid var(--border-color-primary) !important;
 }
 
 .slider_input_container input[type="range"][name="cowbell"]::-moz-range-thumb:hover {
@@ -125,12 +112,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem !important;
+    font-size: 2.5rem !important; /* Kept as is, suitable for zooming */
     margin-bottom: 1rem !important;
 }
 
 h2 {
-    font-size: 1.75rem !important;
+    font-size: 1.75rem !important; /* Kept as is, suitable for zooming */
     margin: 1.5rem 0 1rem 0 !important;
 }
 
@@ -138,101 +125,66 @@ h2 {
 p, .prose {
     color: var(--body-text-color-subdued) !important;
     line-height: 1.6 !important;
-    font-size: 1rem !important;
+    font-size: 1rem !important; /* Relative font size */
 }
 
 /* Alert/Notification Styles */
 .alert-info {
     background: linear-gradient(135deg, #dbeafe, #bfdbfe) !important;
-    border: 1px solid #93c5fd !important;
+    border: 0.0625rem solid #93c5fd !important;
     border-radius: var(--border-radius) !important;
     color: #1e40af !important;
+    font-size: 0.875rem !important; /* Relative font size */
 }
 
 .alert-warning {
     background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
-    border: 1px solid #fcd34d !important;
+    border: 0.0625rem solid #fcd34d !important;
     border-radius: var(--border-radius) !important;
     color: #92400e !important;
+    font-size: 0.875rem !important; /* Relative font size */
 }
 
 .alert-error {
     background: linear-gradient(135deg, #fecaca, #fca5a5) !important;
-    border: 1px solid #f87171 !important;
+    border: 0.0625rem solid #f87171 !important;
     border-radius: var(--border-radius) !important;
     color: #991b1b !important;
-}
-
-/* Progress Bar */
-/* .progress-bar {
-    background: var(--input-background-fill) !important;
-    border-radius: var(--border-radius) !important;
-    overflow: hidden !important;
-}
-
-.progress-bar-inner {
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color)) !important;
-    border-radius: var(--border-radius) !important;
-} */
-
-/* Loading States */
-/* .loading {
-    background: linear-gradient(90deg, transparent, var(--primary-color), transparent) !important;
-    animation: loading 1.5s infinite !important;
-} */
-
-@keyframes loading {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-/* Smooth Transitions */
-* {
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+    font-size: 0.875rem !important; /* Relative font size */
 }
 
 /* Scrollbar (Webkit browsers) */
 ::-webkit-scrollbar {
-    width: 8px !important;
-    height: 8px !important;
+    width: 0.5rem !important; /* Relative size */
+    height: 0.5rem !important;
 }
 
 ::-webkit-scrollbar-track {
     background: var(--background-fill-secondary) !important;
-    border-radius: 4px !important;
+    border-radius: 0.25rem !important;
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--secondary-color) !important;
-    border-radius: 4px !important;
+    border-radius: 0.25rem !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color) !important;
 }
 
-/* Code Block Styling */
-/* pre, code {
-    background: var(--block-background-fill) !important;
-    border-radius: var(--border-radius) !important;
-    border: 1px solid var(--border-color-primary) !important;
-    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace !important;
-} */
-
-/* Image/Video Container */
-/* .media-container {
-    border-radius: var(--border-radius) !important;
-    overflow: hidden !important;
-    box-shadow: var(--shadow-lg) !important;
-    border: 1px solid var(--border-color-primary) !important;
-} */
+/* Tab Styles */
+.gradio-container .tabs button {
+    font-size: 1.0625rem !important; /* Relative font size (17px equivalent) */
+    font-weight: bold !important;
+}
 
 /* Dark Theme Specific Overrides */
 @media (prefers-color-scheme: dark) {
     :root {
-        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-sm: 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -242,9 +194,20 @@ p, .prose {
         background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
     }
 }
-/* Tab Styles */
-.gradio-container .tabs button {
-    font-size: 20px !important; /* Larger font size for tab labels */
-    font-weight: bold; /* Make labels bold */
 
+/* Responsive adjustments for zoom */
+@media screen and (max-width: 48rem) { /* 768px equivalent */
+    .gradio-container {
+        padding: 0.625rem !important;
+    }
+    h1 {
+        font-size: 2rem !important;
+    }
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    button.primary {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+    }
 }

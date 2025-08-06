@@ -9,6 +9,5 @@
     "use_lora": true,
     "lora_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
     "base_model_id": "stabilityai/stable-diffusion-2-1",
-    "lora_rank": 39,
     "lora_scale": 0.7
 }

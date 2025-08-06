@@ -5,7 +5,6 @@ from PIL import Image
 import numpy as np
 from transformers import CLIPTextModel, CLIPTokenizer
 from diffusers import PNDMScheduler, StableDiffusionPipeline
-from peft import LoraConfig
 from tqdm import tqdm
 
 def inference_process(

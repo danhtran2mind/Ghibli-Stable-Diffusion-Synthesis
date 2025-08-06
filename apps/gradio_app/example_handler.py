@@ -22,7 +22,9 @@ def get_examples(examples_dir: Union[str, List[str]] = None, use_lora: bool = No
 
             required_keys = ["prompt", "height", "width", "num_inference_steps", "guidance_scale", "seed", "image"]
             if config.get("use_lora", False):
-                required_keys.extend(["lora_model_id", "base_model_id", "lora_rank", "lora_scale"])
+                required_keys.extend(["lora_model_id", "base_model_id", 
+                                    #   "lora_rank", 
+                                      "lora_scale"])
             else:
                 required_keys.append("finetune_model_id")
 
@@ -39,7 +41,9 @@ def get_examples(examples_dir: Union[str, List[str]] = None, use_lora: bool = No
 
             example = [config["prompt"], config["height"], config["width"], config["num_inference_steps"], 
                        config["guidance_scale"], config["seed"], image]
-            example.extend([config["lora_model_id"], config["base_model_id"], config["lora_rank"], config["lora_scale"]] 
+            example.extend([config["lora_model_id"], config["base_model_id"], 
+                            # config["lora_rank"], 
+                            config["lora_scale"]] 
                           if config.get("use_lora", False) else [config["finetune_model_id"]])
             examples.append(example)
 

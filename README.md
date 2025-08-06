@@ -93,11 +93,11 @@ python src/ghibli_stable_diffusion_synthesis/infer.py \
 python src/ghibli_stable_diffusion_synthesis/infer.py \
     --method lora \
     --prompt "a beautiful city in Ghibli style" \
-    --height 512 --width 512 \
-    --num_inference_steps 50 \
-    --guidance_scale 3.5 \
+    --height 720 --width 1280 \
+    --num_inference_steps 100 \
+    --guidance_scale 15.5 \
     --seed 42 \
-    --lora_scale 1.2 \
+    --lora_scale 0.7 \
     --output_path "tests/test_data/ghibli_style_output_lora.png"
 ```
 #### Inference Arguments

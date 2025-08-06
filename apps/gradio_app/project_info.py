@@ -24,7 +24,7 @@ intro_markdown_2 = """
 outro_markdown_1 = """
     <div style="text-align: left; font-size: 14px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; align-items: center; justify-content: left; gap: 8px;">
-            You can view the pre-trained models on our Hugging Face Model Hubs: 
+            This is pre-trained models on our Hugging Face Model Hubs: 
             <a href="https://huggingface.co/stabilityai/stable-diffusion-2-1">
                 <img src="https://img.shields.io/badge/HuggingFace-stabilityai%2Fstable--diffusion--2--1-yellow?style=flat&logo=huggingface" alt="HuggingFace Model Hub">
             </a>, and 

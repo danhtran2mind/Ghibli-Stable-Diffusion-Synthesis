@@ -95,12 +95,20 @@ def create_gui(model_configs, device):
 
         generate_event_ft = generate_btn_ft.click(
             fn=generate_image, 
-            inputs=[prompt_ft, height_ft, width_ft, num_inference_steps_ft, guidance_scale_ft, seed_ft, random_seed_ft, gr.State(False), finetune_model_path_ft, gr.State(None), gr.State(None), gr.State(None), gr.State(None), gr.State(config_path), gr.State(device), gr.State(dtype)], 
+            inputs=[prompt_ft, height_ft, width_ft, num_inference_steps_ft, 
+                    guidance_scale_ft, seed_ft, random_seed_ft, 
+                    gr.State(False), finetune_model_path_ft, gr.State(None), 
+                    gr.State(None), gr.State(None), 
+                    gr.State(config_path), gr.State(device), gr.State(dtype)], 
             outputs=[output_image_ft, output_text_ft]
         )
         generate_event_lora = generate_btn_lora.click(
             fn=generate_image, 
-            inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, random_seed_lora, gr.State(True), gr.State(None), lora_model_path_lora, base_model_path_lora, lora_scale_lora, gr.State(config_path), gr.State(device), gr.State(dtype)], 
+            inputs=[prompt_lora, height_lora, width_lora, 
+                    num_inference_steps_lora, guidance_scale_lora, seed_lora, 
+                    random_seed_lora, gr.State(True), gr.State(None), 
+                    lora_model_path_lora, base_model_path_lora, lora_scale_lora, 
+                    gr.State(config_path), gr.State(device), gr.State(dtype)], 
             outputs=[output_image_lora, output_text_lora]
         )
 
