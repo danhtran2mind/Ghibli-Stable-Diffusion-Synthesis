@@ -6,8 +6,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
                                              'src', 'ghibli_stable_diffusion_synthesis', 
                                              'inference')))
 
-from inference.full_finetuning import inference_process as full_finetuning_inference
-from inference.lora import inference_process as lora_inference
+from full_finetuning import inference_process as full_finetuning_inference
+from lora import inference_process as lora_inference
 
 def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, 
                    random_seed, use_lora, finetune_model_id, lora_model_id, base_model_id, 
