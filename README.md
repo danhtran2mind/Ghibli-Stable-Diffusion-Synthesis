@@ -92,13 +92,14 @@ python src/ghibli_stable_diffusion_synthesis/infer.py \
 ```bash
 python src/ghibli_stable_diffusion_synthesis/infer.py \
     --method lora \
-    --prompt "donald trump in ghibli style" \
+    --prompt "a beautiful city in Ghibli style" \
     --height 512 --width 512 \
     --num_inference_steps 50 \
     --guidance_scale 3.5 \
     --seed 42 \
     --lora_rank 64 \
-     --lora_scale 1.2 \
+    --lora_alpha 32 \
+    --lora_scale 1.2 \
     --output_path "tests/test_data/ghibli_style_output_lora.png"
 ```
 #### Inference Arguments
