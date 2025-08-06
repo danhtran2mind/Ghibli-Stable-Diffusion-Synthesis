@@ -13,7 +13,7 @@ from peft import LoraConfig
 from tqdm import tqdm
 
 def inference_process(prompt, height, width, num_inference_steps, guidance_scale,
-                      batch_size, seed, lora_scale,
+                      batch_size, seed, lora_scale, lora_rank, lora_alpha,
                       config_path="configs/model_ckpts.yaml",
                       model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
                       ):
@@ -62,8 +62,6 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
     #     pipe.unet.delete_adapter("ghibli-lora")
 
     # Define LoRA configuration with lora_rank
-    lora_rank = 64
-    lora_alpha = 32
     unet_lora_config = LoraConfig(
         r=lora_rank,
         lora_alpha=lora_alpha,
@@ -72,7 +70,7 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
     )
 
     # Load LoRA weights with lora_scale
-    pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=0.8)
+    pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=lora_scale)
     pipe.unet.load_attn_procs(lora_model)  # Load LoRA attention processors
 
     # Move pipeline to device

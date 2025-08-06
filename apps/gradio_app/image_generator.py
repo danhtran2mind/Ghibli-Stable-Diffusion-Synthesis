@@ -10,8 +10,9 @@ from diffusers import (
 from tqdm import tqdm
 from .config_loader import load_model_configs
 
-def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed, use_lora, 
-                  finetune_model_id, lora_model_id, base_model_id, lora_scale, config_path, device, dtype):
+def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, 
+                   random_seed, use_lora, finetune_model_id, lora_model_id, base_model_id, 
+                  lora_scale, config_path, device, dtype):
     if not prompt or height % 8 != 0 or width % 8 != 0 or num_inference_steps not in range(1, 101) or \
        guidance_scale < 1.0 or guidance_scale > 20.0 or seed < 0 or seed > 4294967295 or \
        (use_lora and (lora_scale < 0.0 or lora_scale > 2.0)):
