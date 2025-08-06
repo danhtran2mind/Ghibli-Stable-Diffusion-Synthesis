@@ -242,3 +242,9 @@ p, .prose {
         background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
     }
 }
+/* Tab Styles */
+.gradio-container .tabs button {
+    font-size: 20px !important; /* Larger font size for tab labels */
+    font-weight: bold; /* Make labels bold */
+
+}

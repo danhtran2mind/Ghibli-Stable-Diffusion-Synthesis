@@ -24,163 +24,136 @@ def load_model_configs(config_path: str = "configs/model_ckpts.yaml") -> dict:
     except (IOError, yaml.YAMLError) as e:
         raise ValueError(f"Error loading {config_path}: {e}")
 
-def get_examples(examples_dir: Union[str, List[str]] = "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning", use_lora_filter: bool = None) -> List:
-    """
-    Retrieves a list of file paths from the specified directory or directories, filtered by use_lora.
-
-    Args:
-        examples_dir: Either a single string path or a list of paths to directories containing example files.
-        use_lora_filter: If True, return only LoRA examples; if False, return only Full Finetuning examples; if None, return all.
-
-    Returns:
-        List of example configurations as lists containing prompt, dimensions, and model settings.
-    """
-    # Convert single string to list for uniform processing
-    directories = [examples_dir] if isinstance(examples_dir, str) else examples_dir
+def get_examples(examples_dir: Union[str, List[str]] = None,
+                 use_lora: Union[bool, None] = None) -> List:
+    # Convert single string to list
+    directories = [examples_dir] if isinstance(examples_dir, str) else examples_dir or []
 
     # Validate directories
-    valid_dirs = []
-    for d in directories:
-        if not os.path.exists(d) or not os.path.isdir(d):
-            print(f"Error: Directory {d} does not exist or is not a directory")
-            continue
-        valid_dirs.append(d)
-
+    valid_dirs = [d for d in directories if os.path.isdir(d)]
     if not valid_dirs:
         print("Error: No valid directories found, using provided examples")
-        return get_provided_examples(use_lora_filter)
+        return get_provided_examples(use_lora)
 
-    ans = []
+    examples = []
     for dir_path in valid_dirs:
-        print(f"DEBUG: Scanning directory {dir_path} for examples")
-        # Get subdirectories
-        all_examples_dir = [os.path.join(dir_path, d) for d in os.listdir(dir_path)
-                           if os.path.isdir(os.path.join(dir_path, d))]
+        # Get sorted subdirectories
+        subdirs = sorted(
+            os.path.join(dir_path, d) for d in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, d))
+        )
 
-        for example_dir in sorted(all_examples_dir):
-            config_path = os.path.join(example_dir, "config.json")
-            image_path = os.path.join(example_dir, "result.png")
+        for subdir in subdirs:
+            config_path = os.path.join(subdir, "config.json")
+            image_path = os.path.join(subdir, "result.png")
 
-            if not os.path.isfile(config_path):
-                print(f"Error: config.json not found in {example_dir}")
-                continue
-            if not os.path.isfile(image_path):
-                print(f"Error: result.png not found in {example_dir}")
+            if not (os.path.isfile(config_path) and os.path.isfile(image_path)):
+                print(f"Error: Missing config.json or result.png in {subdir}")
                 continue
 
             try:
                 with open(config_path, 'r') as f:
-                    example_dict = json.load(f)
+                    config = json.load(f)
             except (json.JSONDecodeError, IOError) as e:
-                print(f"Error reading or parsing {config_path}: {e}")
+                print(f"Error reading {config_path}: {e}")
                 continue
 
-            required_keys = ["prompt", "height", "width", "num_inference_steps",
-                           "guidance_scale", "seed", "image"]
-            if example_dict.get("use_lora", False):
+            required_keys = ["prompt", "height", "width", "num_inference_steps", "guidance_scale", "seed", "image"]
+            if config.get("use_lora", False):
                 required_keys.extend(["lora_model_id", "base_model_id", "lora_rank", "lora_scale"])
             else:
                 required_keys.append("finetune_model_id")
 
-            missing_keys = set(required_keys) - set(example_dict.keys())
-            if missing_keys:
-                print(f"Error: Missing required keys in {config_path}: {', '.join(missing_keys)}")
+            if missing_keys := set(required_keys) - set(config.keys()):
+                print(f"Error: Missing keys in {config_path}: {', '.join(missing_keys)}")
                 continue
 
-            if example_dict["image"] != "result.png":
+            if config["image"] != "result.png":
                 print(f"Error: Image key in {config_path} does not match 'result.png'")
                 continue
 
             try:
-                if not Path(image_path).is_file():
-                    print(f"Error: Image file {image_path} does not exist")
-                    continue
-
-                try:
-                    Image.open(image_path).verify()
-                except Exception as e:
-                    print(f"Error: Invalid image file {image_path}: {e}")
-                    continue
-
-                # Filter by use_lora if specified
-                if use_lora_filter is not None and example_dict.get("use_lora", False) != use_lora_filter:
-                    print(f"DEBUG: Skipping example in {config_path} due to use_lora mismatch (expected {use_lora_filter}, got {example_dict.get('use_lora', False)})")
-                    continue
-
-                example_list = [
-                    example_dict["prompt"],
-                    example_dict["height"],
-                    example_dict["width"],
-                    example_dict["num_inference_steps"],
-                    example_dict["guidance_scale"],
-                    example_dict["seed"],
-                    image_path,
-                    example_dict.get("use_lora", False),
-                    example_dict.get("finetune_model_id", None),
-                    example_dict.get("lora_model_id", None),
-                    example_dict.get("base_model_id", None),
-                    example_dict.get("lora_rank", None),
-                    example_dict.get("lora_scale", None)
-                ]
-                ans.append(example_list)
-                print(f"DEBUG: Successfully loaded example from {config_path}: {example_list[:6]}")
-            except KeyError as e:
-                print(f"Error processing {config_path}: Missing key {e}")
+                Image.open(image_path).verify()
+                image = Image.open(image_path)  # Re-open after verify
+            except Exception as e:
+                print(f"Error: Invalid image {image_path}: {e}")
                 continue
 
-    # If no valid examples are found, return provided examples
-    if not ans:
-        print("DEBUG: No valid examples found in directory, using provided examples")
-        return get_provided_examples(use_lora_filter)
+            if use_lora is not None and config.get("use_lora", False) != use_lora:
+                print(f"DEBUG: Skipping {config_path} due to use_lora mismatch (expected {use_lora}, got {config.get('use_lora', False)})")
+                continue
 
-    return ans
+            # Build example list based on use_lora
+            example = [
+                config["prompt"],
+                config["height"],
+                config["width"],
+                config["num_inference_steps"],
+                config["guidance_scale"],
+                config["seed"],
+                image,
+                # config.get("use_lora", False)
+            ]
+            if config.get("use_lora", False):
+                example.extend([
+                    config["lora_model_id"],
+                    config["base_model_id"],
+                    config["lora_rank"],
+                    config["lora_scale"]
+                ])
+            else:
+                example.append(config["finetune_model_id"])
 
-def get_provided_examples(use_lora_filter: bool = None) -> List:
-    """
-    Returns provided example configurations as a fallback.
+            examples.append(example)
+            print(f"DEBUG: Loaded example from {config_path}: {example[:6]}")
 
-    Args:
-        use_lora_filter: If True, return only LoRA examples; if False, return only Full Finetuning examples; if None, return all.
+    return examples or get_provided_examples(use_lora)
 
-    Returns:
-        A list containing example configurations.
-    """
-    provided_examples = [
-        [
-            "a serene landscape in Ghibli style",
-            256,
-            512,
-            50,
-            3.5,
-            42,
-            "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning/example1/result.png",
-            False,
-            "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
-            None,
-            None,
-            None,
-            None
-        ],
-        [
-            "a cat is laying on a sofa in Ghibli style",
-            512,
-            768,
-            100,
-            10.0,
-            789,
-            "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning/example2/result.png",
-            True,
-            None,
-            "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
-            "stabilityai/stable-diffusion-2-1",
-            64,
-            0.9
-        ]
-    ]
+def get_provided_examples(use_lora: bool = False) -> list:
+    example1_image = None
+    example2_image = None
+    # Attempt to load example images
+    if use_lora:
+        try:
+            example2_path = "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA/1/result.png"
+            if os.path.exists(example2_path):
+                example2_image = Image.open(example2_path)
+        except Exception as e:
+            print(f"Failed to load example2 image: {e}")
+        output = [list({
+            "prompt": "a cat is laying on a sofa in Ghibli style",
+            "width": 512,
+            "height": 768,
+            "steps": 100,
+            "cfg_scale": 10.0,
+            "seed": 789,
+            "image": example2_path, # example2_image,
+            # "use_lora": True,
+            "model": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+            "base_model": "stabilityai/stable-diffusion-2-1",
+            "lora_rank": 64,
+            "lora_alpha": 0.9
+        }.values())]
 
-    if use_lora_filter is not None:
-        return [ex for ex in provided_examples if ex[7] == use_lora_filter]
-    return provided_examples
+    else:
+        try:
+            example1_path = "apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning/1/result.png"
+            if os.path.exists(example1_path):
+                example1_image = Image.open(example1_path)
+        except Exception as e:
+            print(f"Failed to load example1 image: {e}")
+        output = [list({
+            "prompt": "a serene landscape in Ghibli style",
+            "width": 256,
+            "height": 512,
+            "steps": 50,
+            "cfg_scale": 3.5,
+            "seed": 42,
+            "image": example1_path, # example1_image,
+            # "use_lora": False,
+            "model": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
+        }.values())]
+    
+    return output
 
 def create_demo(
     config_path: str = "configs/model_ckpts.yaml",
@@ -346,48 +319,26 @@ def create_demo(
             return None, f"Failed to generate image: {e}"
 
     def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale,
-                                          seed, image_path, use_lora, finetune_model_id):
+                                          seed, image, finetune_model_id):
         try:
-            image = None
-            status = "No image available"
-            if image_path and os.path.isfile(image_path):
-                try:
-                    image = Image.open(image_path)
-                    image.load()
-                    status = f"Loaded example image: {image_path}"
-                except Exception as e:
-                    print(f"DEBUG: Error loading image {image_path}: {e}")
-                    status = f"Error: Invalid image file {image_path}: {e}"
-            else:
-                print(f"DEBUG: Invalid or missing image_path: {image_path}")
-                status = f"Error: Image path {image_path} does not exist or is None"
-
+            status = "Loaded example successfully"
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                image, use_lora, finetune_model_id, status
+                image, finetune_model_id, status
             )
         except Exception as e:
             print(f"DEBUG: Exception in load_example_image: {e}")
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                None, use_lora, finetune_model_id,
+                None, finetune_model_id,
                 f"Error loading example: {e}"
             )
 
     def load_example_image_lora(prompt, height, width, num_inference_steps, guidance_scale,
-                               seed, image_path, use_lora, lora_model_id,
+                               seed, image, lora_model_id,
                                base_model_id, lora_rank, lora_scale):
         try:
-            image = None
-            status = "No image available"
-            if image_path and Path(image_path).is_file():
-                image = Image.open(image_path)
-                image.load()
-                status = f"Loaded example image: {image_path}"
-            else:
-                print(f"DEBUG: Invalid or missing image_path: {image_path}")
-                status = f"Error: Image path {image_path} does not exist or is None"
-
+            status = "Loaded example successfully"
             # Ensure base_model_id, lora_rank, and lora_scale have valid values
             base_model_id = base_model_id or "stabilityai/stable-diffusion-2-1"
             lora_rank = lora_rank if lora_rank is not None else 64
@@ -395,14 +346,14 @@ def create_demo(
 
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                image, use_lora, lora_model_id, base_model_id,
+                image, lora_model_id, base_model_id,
                 lora_rank, lora_scale, status
             )
         except Exception as e:
             print(f"DEBUG: Exception in load_example_image_lora: {e}")
             return (
                 prompt, height, width, num_inference_steps, guidance_scale, seed,
-                None, use_lora, lora_model_id, base_model_id or "stabilityai/stable-diffusion-2-1",
+                None, lora_model_id, base_model_id or "stabilityai/stable-diffusion-2-1",
                 lora_rank or 64, lora_scale or 1.2, f"Error loading example: {e}"
             )
 
@@ -430,16 +381,17 @@ def create_demo(
         print("Error: styles.css not found, using default styling")
         custom_css = ""
 
-    # Load examples with filtering
-    examples_full_finetuning = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning", use_lora_filter=False)
-    # examples_lora = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning", use_lora_filter=True)
-
+    examples_full_finetuning = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-Base-finetuning",
+                                             use_lora=False)
+    examples_lora = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA", 
+                                 use_lora=True)
+    
     with gr.Blocks(css=custom_css, theme="ocean") as demo:
         gr.Markdown("## Ghibli-Style Image Generator")
         with gr.Tabs():
             with gr.Tab(label="Full Finetuning"):
                 with gr.Row():
-                    with gr.Column(scale=1):
+                    with gr.Column(scale.=1):
                         gr.Markdown("### Image Generation Settings")
                         prompt_ft = gr.Textbox(
                             label="Prompt",
@@ -475,7 +427,7 @@ def create_demo(
                                 label="Fine-tuned Model", choices=finetune_model_ids,
                                 value=finetune_model_id
                             )
-                        image_path_ft = gr.Textbox(visible=False)
+                        # image_path_ft = gr.Textbox(visible=False)
 
                     with gr.Column(scale=1):
                         gr.Markdown("### Generated Result")
@@ -489,14 +441,14 @@ def create_demo(
                 gr.Examples(
                     examples=examples_full_finetuning,
                     inputs=[
-                        prompt_ft, height_ft, width_ft, num_inference_steps_ft, guidance_scale_ft, seed_ft,
-                        output_image_ft, gr.State(value=False), finetune_model_path_ft
+                        prompt_ft, height_ft, width_ft, num_inference_steps_ft, 
+                        guidance_scale_ft, seed_ft, output_image_ft, finetune_model_path_ft
                     ],
-                    outputs=[
-                        prompt_ft, height_ft, width_ft, num_inference_steps_ft, guidance_scale_ft, seed_ft,
-                        output_image_ft, gr.State(value=False), finetune_model_path_ft, output_text_ft
-                    ],
+                    outputs=[prompt_ft, height_ft, width_ft, num_inference_steps_ft,
+                             guidance_scale_ft, seed_ft, output_image_ft, finetune_model_path_ft,
+                             output_text_ft],
                     fn=load_example_image_full_finetuning,
+                    # fn=lambda *args: load_example_image_full_finetuning(*args),
                     cache_examples=False,
                     label="Examples for Full Fine-tuning",
                     examples_per_page=4
@@ -552,7 +504,7 @@ def create_demo(
                                 label="Base Model", choices=base_model_ids,
                                 value=base_model_id
                             )
-                        image_path_lora = gr.Textbox(visible=False)
+                        # image_path_lora = gr.Textbox(visible=False)
 
                     with gr.Column(scale=1):
                         gr.Markdown("### Generated Result")
@@ -563,23 +515,27 @@ def create_demo(
                         stop_btn_lora = gr.Button("Stop Generation")
 
                 gr.Markdown("### Examples for LoRA")
-                # gr.Examples(
-                #     examples=examples_lora,
-                #     inputs=[
-                #         prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora,
-                #         output_image_lora, gr.State(value=True), lora_model_path_lora, base_model_path_lora,
-                #         lora_rank_lora, lora_scale_lora
-                #     ],
-                #     outputs=[
-                #         prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora,
-                #         output_image_lora, gr.State(value=True), lora_model_path_lora, base_model_path_lora,
-                #         lora_rank_lora, lora_scale_lora, output_text_lora
-                #     ],
-                #     fn=load_example_image_lora,
-                #     cache_examples=False,
-                #     label="Examples for LoRA",
-                #     examples_per_page=4
-                # )
+                gr.Examples(
+                    examples=examples_lora,
+                    inputs=[
+                        prompt_lora, height_lora, width_lora, num_inference_steps_lora, 
+                        guidance_scale_lora, seed_lora, output_image_lora,      
+                        lora_model_path_lora, base_model_path_lora,
+                        lora_rank_lora, lora_scale_lora
+                    ],
+                    outputs=[
+                        prompt_lora, height_lora, width_lora, num_inference_steps_lora,
+                        guidance_scale_lora, seed_lora, output_image_lora,
+                        lora_model_path_lora, base_model_path_lora,
+                        lora_rank_lora, lora_scale_lora,
+                        output_text_lora
+                    ],
+                    fn=load_example_image_lora,
+                    # fn=lambda *args: load_example_image_lora(*args),
+                    cache_examples=False,
+                    label="Examples for LoRA",
+                    examples_per_page=4
+                )
 
         gr.Markdown(badges_text)
 
