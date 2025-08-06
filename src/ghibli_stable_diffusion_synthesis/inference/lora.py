@@ -17,8 +17,6 @@ def inference_process(
     batch_size,
     seed,
     lora_scale,
-    lora_rank,
-    lora_alpha,
     config_path="configs/model_ckpts.yaml",
     model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
 ):
@@ -61,21 +59,6 @@ def inference_process(
         torch_dtype=dtype,
         use_safetensors=True
     )
-
-    # Define LoRA configuration
-    unet_lora_config = LoraConfig(
-        r=lora_rank,
-        lora_alpha=lora_alpha,
-        init_lora_weights="gaussian",
-        target_modules=["to_k", "to_q", "to_v", "to_out.0"],
-    )
-
-    # Remove existing adapter if it exists
-    if "ghibli-lora" in pipe.unet.get_adapter_names():
-        pipe.unet.delete_adapter("ghibli-lora")
-
-    # Add LoRA adapter to UNet
-    pipe.unet.add_adapter(unet_lora_config, adapter_name="ghibli-lora")
 
     # Load pre-trained LoRA weights with custom scale
     pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=lora_scale)
