@@ -7,15 +7,14 @@ from diffusers import (
     PNDMScheduler, StableDiffusionPipeline
 )
 
-from peft import LoraConfig
 from tqdm import tqdm
 from .config_loader import load_model_configs
 
 def generate_image(prompt, height, width, num_inference_steps, guidance_scale, seed, random_seed, use_lora, 
-                  finetune_model_id, lora_model_id, base_model_id, lora_rank, lora_scale, config_path, device, dtype):
+                  finetune_model_id, lora_model_id, base_model_id, lora_scale, config_path, device, dtype):
     if not prompt or height % 8 != 0 or width % 8 != 0 or num_inference_steps not in range(1, 101) or \
        guidance_scale < 1.0 or guidance_scale > 20.0 or seed < 0 or seed > 4294967295 or \
-       (use_lora and (lora_rank < 1 or lora_rank > 128 or lora_scale < 0.0 or lora_scale > 2.0)):
+       (use_lora and (lora_scale < 0.0 or lora_scale > 2.0)):
         return None, "Invalid input parameters."
 
     model_configs = load_model_configs(config_path)
@@ -31,8 +30,6 @@ def generate_image(prompt, height, width, num_inference_steps, guidance_scale, s
             pipe = StableDiffusionPipeline.from_pretrained(base_model_path, torch_dtype=dtype, use_safetensors=True)
             
             # Add LoRA weights with specified rank and scale
-            lora_config = LoraConfig(r=lora_rank)  # r is the LoRA rank
-            pipe.unet.add_adapter(lora_config)
             pipe.load_lora_weights(lora_model_path, adapter_name="ghibli-lora", 
                                    lora_scale=lora_scale)
             
