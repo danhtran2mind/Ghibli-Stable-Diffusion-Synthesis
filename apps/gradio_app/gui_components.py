@@ -1,9 +1,9 @@
 import gradio as gr
 import torch
 import os
-from example_handler import get_examples
-from image_generator import generate_image
-from project_info import intro_markdown_1, intro_markdown_2, outro_markdown_1
+from .example_handler import get_examples
+from .image_generator import generate_image
+from .project_info import intro_markdown_1, intro_markdown_2, outro_markdown_1
 
 def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id):
     return prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id, "Loaded example successfully"
@@ -21,9 +21,7 @@ def create_gui(model_configs, device):
     base_model_id = model_configs[lora_model_id].get('base_model_id', 'stabilityai/stable-diffusion-2-1')
     device = torch.device(device)
     dtype = torch.float16 if device.type == "cuda" else torch.float32
-    config_path = "configs/model_ckpts.yaml"
-
-    
+    config_path = "configs/model_ckpts.yaml"    
 
     custom_css = open("apps/gradio_app/static/styles.css", "r").read() if os.path.exists("apps/gradio_app/static/styles.css") else ""
 
@@ -31,7 +29,7 @@ def create_gui(model_configs, device):
     examples_lora = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA", use_lora=True)
 
     with gr.Blocks(css=custom_css, theme="ocean") as demo:
-        gr.Markdown("## Ghibli-Style Image Generator")
+        gr.Markdown("# Ghibli Stable Diffusion Synthesis")
         gr.Markdown(intro_markdown_1)
         gr.Markdown(intro_markdown_2)
         with gr.Tabs():
