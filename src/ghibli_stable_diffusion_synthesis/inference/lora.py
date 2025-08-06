@@ -4,11 +4,16 @@ import torch
 from PIL import Image
 import numpy as np
 from transformers import CLIPTextModel, CLIPTokenizer
-from diffusers import PNDMScheduler, StableDiffusionPipeline
+from diffusers import (
+    PNDMScheduler, 
+    StableDiffusionPipeline,
+    LoraConfig
+)
+
 from tqdm import tqdm
 
 def inference_process(prompt, height, width, num_inference_steps, guidance_scale,
-                      batch_size, seed, lora_scale,
+                      batch_size, seed, lora_scale, lora_rank,
                       config_path="configs/model_ckpts.yaml",
                       model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
                       ):
@@ -52,6 +57,9 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
         use_safetensors=True
     )
 
+    # Add LoRA weights with specified rank and scale
+    lora_config = LoraConfig(r=lora_rank)  # r is the LoRA rank
+    pipe.unet.add_adapter(lora_config)
     # Load LoRA weights
     pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=lora_scale)
 

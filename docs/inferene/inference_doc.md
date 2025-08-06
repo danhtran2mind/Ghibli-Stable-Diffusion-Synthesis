@@ -14,6 +14,7 @@ This guide describes the command-line arguments for the `infer.py` script, which
 | `--guidance_scale`      | Float  | `3.5`                                      | Guidance scale for classifier-free guidance.                                |
 | `--batch_size`          | Integer| `1`                                        | Batch size for inference.                                                  |
 | `--seed`                | Integer| `42`                                       | Random seed for reproducibility.                                           |
+| `--lora_rank`         | Integer | `64`               | Rank for LoRA (only used if method is 'lora').                                  |
 | `--lora_scale`          | Float  | `1.2`                                      | Scaling factor for LoRA weights (applicable when using LoRA method).        |
 | `--config_path`         | String | `"configs/model_ckpts.yaml"`               | Path to the model configuration YAML file.                                  |
 | `--output_path`         | String | `"test_data/ghibli_style_{method}_output.png"`               | Path to save the output image.                                  |
@@ -28,7 +29,7 @@ python infer.py --method full_finetuning --prompt "donald trump in ghibli style"
   The output_path is `tests/test_data/ghibli_style_output_full_finetuning.png`.
 - To run inference with LoRA:
 ```bash
-python infer.py --method lora --prompt "donald trump in ghibli style" --height 512 --width 512 --num_inference_steps 50 --guidance_scale 3.5 --batch_size 1 --seed 42 --lora_scale 1.2 --config_path configs/model_ckpts.yaml
+python infer.py --method lora --prompt "donald trump in ghibli style" --height 512 --width 512 --num_inference_steps 50 --guidance_scale 3.5 --batch_size 1 --seed 42 --lora_scale 1.2 --lora_rank 64 --config_path configs/model_ckpts.yaml
 ```
   The output_path is `tests/test_data/ghibli_style_output_lora.png`.
 ## Notes

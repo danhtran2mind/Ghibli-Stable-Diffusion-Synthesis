@@ -79,7 +79,8 @@ Refer to the [Training Documents](docs/training/training_doc.md) for detailed ar
 #### Quick Inference Bash
 - To generate iamge using the `Full Fine-tuning` model:
 ```bash
-python infer.py --method full_finetuning 
+python src/ghibli_stable_diffusion_synthesis/infer.py \
+    --method full_finetuning \
     --prompt "donald trump in ghibli style" \
     --height 512 --width 512 \
     --num_inference_steps 50 \
@@ -89,14 +90,15 @@ python infer.py --method full_finetuning
 ```
 - To run inference with `LoRA`:
 ```bash
-python infer.py --method lora 
+python src/ghibli_stable_diffusion_synthesis/infer.py \
+    --method lora \
     --prompt "donald trump in ghibli style" \
     --height 512 --width 512 \
     --num_inference_steps 50 \
     --guidance_scale 3.5 \
     --batch_size 1 --seed 42 \
     --lora_scale 1.2 \
-    --output_path "tests/test_data/ghibli_style_output_lora.png" \
+    --output_path "tests/test_data/ghibli_style_output_lora.png"
 ```
 #### Inference Arguments
 Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed arguments used in Inference. ⚙️

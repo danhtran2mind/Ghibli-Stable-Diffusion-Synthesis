@@ -2,7 +2,11 @@ import torch
 from PIL import Image
 import numpy as np
 from transformers import CLIPTextModel, CLIPTokenizer
-from diffusers import AutoencoderKL, UNet2DConditionModel, PNDMScheduler, StableDiffusionPipeline
+from diffusers import (
+    AutoencoderKL, UNet2DConditionModel, 
+    PNDMScheduler, StableDiffusionPipeline,
+    LoraConfig
+)
 from tqdm import tqdm
 from .config_loader import load_model_configs
 
@@ -22,8 +26,15 @@ def generate_image(prompt, height, width, num_inference_steps, guidance_scale, s
 
     try:
         if use_lora:
+            # Load base pipeline
             pipe = StableDiffusionPipeline.from_pretrained(base_model_path, torch_dtype=dtype, use_safetensors=True)
-            pipe.load_lora_weights(lora_model_path, adapter_name="ghibli-lora", lora_scale=lora_scale)
+            
+            # Add LoRA weights with specified rank and scale
+            lora_config = LoraConfig(r=lora_rank)  # r is the LoRA rank
+            pipe.unet.add_adapter(lora_config)
+            pipe.load_lora_weights(lora_model_path, adapter_name="ghibli-lora", 
+                                   lora_scale=lora_scale)
+            
             pipe = pipe.to(device)
             vae, tokenizer, text_encoder, unet, scheduler = pipe.vae, pipe.tokenizer, pipe.text_encoder, pipe.unet, PNDMScheduler.from_config(pipe.scheduler.config)
         else:

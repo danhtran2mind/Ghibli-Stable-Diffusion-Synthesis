@@ -20,6 +20,8 @@ def parse_args():
                         help="Batch size for inference")
     parser.add_argument("--seed", type=int, default=42, 
                         help="Random seed for reproducibility")
+    parser.add_argument("--lora_rank", type=int, default=64, 
+                        help="Rank for LoRA (only used if method is 'lora')")
     parser.add_argument("--lora_scale", type=float, default=1.2, 
                         help="Scaling factor for LoRA weights")
     parser.add_argument("--config_path", type=str, default="configs/model_ckpts.yaml", 
@@ -39,7 +41,7 @@ if __name__ == "__main__":
             guidance_scale=args.guidance_scale,
             batch_size=args.batch_size,
             seed=args.seed,
-            lora_scale=args.lora_scale,
+
             config_path=args.config_path,
             model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
         )
@@ -52,6 +54,7 @@ if __name__ == "__main__":
             guidance_scale=args.guidance_scale,
             batch_size=args.batch_size,
             seed=args.seed,
+            lora_rank=
             lora_scale=args.lora_scale,
             config_path=args.config_path,
             model_id="danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA"
