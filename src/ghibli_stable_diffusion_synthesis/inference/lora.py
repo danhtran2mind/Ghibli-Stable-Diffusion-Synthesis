@@ -57,6 +57,16 @@ def inference_process(prompt, height, width, num_inference_steps, guidance_scale
         use_safetensors=True
     )
 
+    # Define LoRA configuration
+    lora_rank = 64
+    lora_config = LoraConfig(
+        r=lora_rank,  # LoRA rank
+        lora_alpha=32,
+        target_modules=["to_k", "to_q", "to_v", "to_out.0"],
+        lora_dropout=0.1,
+        bias="none"
+    )
+    pipe.unet.add_adapter(lora_config, adapter_name="ghibli-lora")
     # Load LoRA weights
     pipe.load_lora_weights(lora_model, adapter_name="ghibli-lora", lora_scale=lora_scale)
 
