@@ -8,8 +8,8 @@ from .project_info import intro_markdown_1, intro_markdown_2, outro_markdown_1
 def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id):
     return prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id, "Loaded example successfully"
 
-def load_example_image_lora(prompt, height, width, num_inference_steps, guidance_scale, seed, image, lora_model_id, base_model_id, lora_rank, lora_scale):
-    return prompt, height, width, num_inference_steps, guidance_scale, seed, image, lora_model_id, base_model_id or "stabilityai/stable-diffusion-2-1", lora_rank or 64, lora_scale or 1.2, "Loaded example successfully"
+def load_example_image_lora(prompt, height, width, num_inference_steps, guidance_scale, seed, image, lora_model_id, base_model_id, lora_scale):
+    return prompt, height, width, num_inference_steps, guidance_scale, seed, image, lora_model_id, base_model_id or "stabilityai/stable-diffusion-2-1", lora_scale or 1.2, "Loaded example successfully"
 
 def create_gui(model_configs, device):
     finetune_model_id = next((mid for mid, cfg in model_configs.items() if cfg.get('type') == 'full_finetuning'), None)
@@ -74,7 +74,6 @@ def create_gui(model_configs, device):
                         with gr.Accordion("Advanced Settings", open=False):
                             num_inference_steps_lora = gr.Slider(1, 100, 50, step=1, label="Inference Steps")
                             guidance_scale_lora = gr.Slider(1.0, 20.0, 3.5, step=0.5, label="Guidance Scale")
-                            lora_rank_lora = gr.Slider(1, 128, 64, step=1, label="LoRA Rank")
                             lora_scale_lora = gr.Slider(0.0, 2.0, 1.2, step=0.1, label="LoRA Scale")
                             random_seed_lora = gr.Checkbox(label="Use Random Seed")
                             seed_lora = gr.Slider(0, 4294967295, 42, step=1, label="Seed")
@@ -88,8 +87,8 @@ def create_gui(model_configs, device):
                         generate_btn_lora = gr.Button("Generate Image", variant="primary")
                         stop_btn_lora = gr.Button("Stop Generation")
                 gr.Markdown("### Examples for LoRA")
-                gr.Examples(examples=examples_lora, inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_rank_lora, lora_scale_lora], 
-                            outputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_rank_lora, lora_scale_lora, output_text_lora], 
+                gr.Examples(examples=examples_lora, inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_scale_lora], 
+                            outputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_scale_lora, output_text_lora], 
                             fn=load_example_image_lora, cache_examples=False, examples_per_page=4)
 
         gr.Markdown(outro_markdown_1)
@@ -101,7 +100,7 @@ def create_gui(model_configs, device):
         )
         generate_event_lora = generate_btn_lora.click(
             fn=generate_image, 
-            inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, random_seed_lora, gr.State(True), gr.State(None), lora_model_path_lora, base_model_path_lora, lora_rank_lora, lora_scale_lora, gr.State(config_path), gr.State(device), gr.State(dtype)], 
+            inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, random_seed_lora, gr.State(True), gr.State(None), lora_model_path_lora, base_model_path_lora, lora_scale_lora, gr.State(config_path), gr.State(device), gr.State(dtype)], 
             outputs=[output_image_lora, output_text_lora]
         )
 

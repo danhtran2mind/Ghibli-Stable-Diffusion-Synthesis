@@ -97,7 +97,7 @@ python src/ghibli_stable_diffusion_synthesis/infer.py \
     --num_inference_steps 50 \
     --guidance_scale 3.5 \
     --batch_size 1 --seed 42 \
-    --lora_rank 64 --lora_scale 1.2 \
+     --lora_scale 1.2 \
     --output_path "tests/test_data/ghibli_style_output_lora.png"
 ```
 #### Inference Arguments
