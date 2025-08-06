@@ -6,10 +6,10 @@ import numpy as np
 from transformers import CLIPTextModel, CLIPTokenizer
 from diffusers import (
     PNDMScheduler, 
-    StableDiffusionPipeline,
-    LoraConfig
+    StableDiffusionPipeline
 )
 
+from peft import LoraConfig
 from tqdm import tqdm
 
 def inference_process(prompt, height, width, num_inference_steps, guidance_scale,

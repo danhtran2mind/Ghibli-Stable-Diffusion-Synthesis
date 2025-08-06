@@ -4,9 +4,10 @@ import numpy as np
 from transformers import CLIPTextModel, CLIPTokenizer
 from diffusers import (
     AutoencoderKL, UNet2DConditionModel, 
-    PNDMScheduler, StableDiffusionPipeline,
-    LoraConfig
+    PNDMScheduler, StableDiffusionPipeline
 )
+
+from peft import LoraConfig
 from tqdm import tqdm
 from .config_loader import load_model_configs
 
