@@ -44,7 +44,7 @@ def generate_image(prompt, height, width, num_inference_steps, guidance_scale, s
                 lora_scale=lora_scale,
                 config_path=config_path,
                 model_id=model_id,
-                base_model_id=base_model_id,
+                # base_model_id=base_model_id,
                 device=device,
                 dtype=dtype
             )
