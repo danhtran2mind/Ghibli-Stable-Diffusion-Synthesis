@@ -3,7 +3,7 @@
     "height": 384,
     "width": 192,
     "num_inference_steps": 50,
-    "guidance_scale": 6.5,
+    "guidance_scale": 15.5,
     "seed": 4223,
     "image": "result.png",
     "use_lora": false,

@@ -3,7 +3,7 @@ import torch
 import os
 from .example_handler import get_examples
 from .image_generator import generate_image
-from .project_info import intro_markdown_1, intro_markdown_2, outro_markdown_1
+from .project_info import intro_markdown_1, intro_markdown_2, intro_markdown_3, outro_markdown_1
 
 def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id):
     return prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id, "Loaded example successfully"
@@ -32,6 +32,7 @@ def create_gui(model_configs, device):
         gr.Markdown("# Ghibli Stable Diffusion Synthesis")
         gr.HTML(intro_markdown_1)
         gr.HTML(intro_markdown_2)
+        gr.HTML(intro_markdown_3)
         with gr.Tabs():
             with gr.Tab(label="Full Finetuning"):
                 with gr.Row():

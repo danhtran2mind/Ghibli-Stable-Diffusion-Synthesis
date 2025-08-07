@@ -1,10 +1,10 @@
 {
-    "prompt": "donald trump",
+    "prompt": "Donald Trump",
     "height": 512,
-    "width": 768,
+    "width": 512,
     "num_inference_steps": 100,
-    "guidance_scale": 5.0,
-    "seed": 10,
+    "guidance_scale": 9,
+    "seed": 200,
     "image": "result.png",
     "use_lora": false,
     "finetune_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
