@@ -50,7 +50,8 @@ The **Ghibli Fine-Tuned Stable Diffusion 2.1** project is a cutting-edge endeavo
 
 ## Training Notebook
 
-The cornerstone of this project is the Jupyter notebook located at `notebooks/ghibli-sd-2.1-base-finetuning.ipynb`. This notebook provides a step-by-step guide to fine-tuning the Stable Diffusion 2.1 model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
+### For `Full Finetuning` training
+The cornerstone of this project is the Jupyter notebook located at `notebooks/ghibli-sd-2.1-base-finetuning.ipynb`. This notebook provides a step-by-step guide to fine-tuning the `Stable Diffusion 2.1 Base` model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
 [![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
@@ -60,6 +61,18 @@ The cornerstone of this project is the Jupyter notebook located at `notebooks/gh
 [![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/main?filepath=notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
 [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FGhibli-Stable-Diffusion-Synthesis%2Fblob%2Fmain%2Fnotebooks%2Fghibli-sd-2.1-base-finetuning.ipynb)
 [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-base-finetuning.ipynb)
+
+### For `LoRA` training
+The foundation of this project is the Jupyter notebook found at `notebooks/ghibli-sd-2.1-lora.ipynb`. It offers a clear, step-by-step walkthrough for fine-tuning the `Stable Diffusion 2.1` model with the Ghibli dataset using LoRA (Low-Rank Adaptation), including code, detailed notes, and practical tips. Crafted for both novices and seasoned users, it supports easy replication of the training process or experimentation with custom tweaks. The notebook is compatible with the following platforms:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-lora.ipynb)
+[![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-lora.ipynb)
+[![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-lora.ipynb)
+[![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/main?filepath=notebooks/ghibli-sd-2.1-lora.ipynb)
+[![Open in Gradient](https://assets.paperspace.com/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-lora.ipynb)
+[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/main?filepath=notebooks/ghibli-sd-2.1-lora.ipynb)
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FGhibli-Stable-Diffusion-Synthesis%2Fblob%2Fmain%2Fnotebooks%2Fghibli-sd-2.1-lora.ipynb)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/blob/main/notebooks/ghibli-sd-2.1-lora.ipynb)
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
 
@@ -208,7 +221,7 @@ Ensure your environment matches these specifications to avoid compatibility issu
 
 ## Contact
 
-For questions, issues, or to request the git-crypt decryption key, please contact the maintainer via the [Issues tab](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1/issues) on GitHub.
+For questions, issues, please contact the maintainer via the [Issues tab](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/issues) on GitHub.
 
 ## License
 
