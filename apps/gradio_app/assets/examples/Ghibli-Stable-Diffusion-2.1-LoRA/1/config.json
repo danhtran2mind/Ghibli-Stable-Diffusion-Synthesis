@@ -1,0 +1,13 @@
+{
+    "prompt": "a cat is laying on a sofa in Ghibli style",
+    "height": 512,
+    "width": 768,
+    "num_inference_steps": 100,
+    "guidance_scale": 10,
+    "seed": 789,
+    "image": "result.png",
+    "use_lora": true,
+    "lora_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+    "base_model_id": "stabilityai/stable-diffusion-2-1",
+    "lora_scale": 0.9
+}

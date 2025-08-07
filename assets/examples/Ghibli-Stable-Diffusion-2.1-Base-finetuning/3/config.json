@@ -1,0 +1,11 @@
+{
+    "prompt": "a dancer in Ghibli style",
+    "height": 384,
+    "width": 192,
+    "num_inference_steps": 50,
+    "guidance_scale": 15.5,
+    "seed": 4223,
+    "image": "result.png",
+    "use_lora": false,
+    "finetune_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-Base-finetuning"
+}

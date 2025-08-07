@@ -1,3 +1,4 @@
+
 # Ghibli Stable Diffusion Synthesis 🎨
 
 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis?style=social&label=Repo%20Stars)](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/stargazers)
@@ -15,13 +16,39 @@
 [![gradio](https://img.shields.io/badge/gradio-blue.svg?logo=gradio)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+
+<!-- ## Table of Contents
+-   [Introduction](./README.md#introduction)
+-   [Key Features](./README.md#key-features)
+-   [Training Notebook](./README.md#training-notebook)
+-   [Dataset](./README.md#dataset)
+-   [Base Model](./README.md#base-model)
+-   [Installation](./README.md#installation)
+-   [Usage](./README.md#usage)
+    -   [Running the Training Notebook](./README.md#running-the-training-notebook)
+    -   [Running the Gradio Demo](./README.md#running-the-gradio-demo)
+-   [Training Hyperparameters](./README.md#training-hyperparameters)
+-   [Metrics](./README.md#metrics)
+-   [Environment](./README.md#environment)
+-   [Demonstration](./README.md#demonstration)
+-   [Contact](./README.md#contact)
+-   [License](./README.md#license)
+-   [Acknowledgements](./README.md#acknowledgements)
+-   [Contributing](./README.md#contributing) -->
+
 ## Introduction
 
 The **Ghibli Fine-Tuned Stable Diffusion 2.1** project is a cutting-edge endeavor that harnesses the power of deep learning to generate images in the enchanting and iconic art style of Studio Ghibli. By fine-tuning the Stable Diffusion 2.1 model, this project enables the creation of visually stunning images that capture the vibrant colors, intricate details, and whimsical charm of Ghibli films. The repository includes a meticulously crafted Jupyter notebook for training, an interactive Gradio demo for real-time image generation, and comprehensive instructions for setup and usage. Designed for data scientists, developers, and Ghibli enthusiasts, this project bridges technology and artistry with unparalleled precision.
 
 ## Key Features
 
-## Training Notebooks
+-   **Fine-Tuned Model**: A Stable Diffusion 2.1 model optimized for Studio Ghibli’s art style, delivering authentic and high-quality image outputs.
+-   **Comprehensive Training Notebook**: A detailed Jupyter notebook that guides users through the fine-tuning process, compatible with multiple platforms.
+-   **Interactive Gradio Demo**: A user-friendly interface for generating Ghibli-style images, showcasing the model’s capabilities in real-time.
+-   **Secure Data Handling**: Encrypted dataset and model files using git-crypt, ensuring data integrity and controlled access.
+-   **Cross-Platform Compatibility**: Support for Google Colab, Amazon SageMaker, Deepnote, and JupyterLab, providing flexibility for all users.
+
+## Training Notebook
 
 ### For `Full Finetuning` training
 The cornerstone of this project is the Jupyter notebook located at `notebooks/ghibli-sd-2.1-base-finetuning.ipynb`. This notebook provides a step-by-step guide to fine-tuning the `Stable Diffusion 2.1 Base` model using the Ghibli dataset, complete with code, explanations, and best practices. It is designed to be accessible to both beginners and experienced practitioners, offering flexibility to replicate the training process or experiment with custom modifications. The notebook is compatible with the following platforms:
@@ -49,141 +76,172 @@ The foundation of this project is the Jupyter notebook found at `notebooks/ghibl
 
 To get started, open the notebook in your preferred platform and follow the instructions to set up the environment and execute the training process.
 
-## Datasets
+## Dataset
 
-Each task employs a dedicated dataset hosted on HuggingFace, tailored to support the unique requirements of the training process while reflecting Ghibli’s distinctive artistry:
+The project utilizes the [Ghibli Dataset](https://huggingface.co/datasets/uwunish/ghibli-dataset) from Hugging Face, a carefully curated collection of images from Studio Ghibli films. This dataset encapsulates the unique visual style of Ghibli, featuring vibrant colors, intricate landscapes, and whimsical characters, making it ideal for fine-tuning the model.
 
--   **Full Fine-Tuning Task**: Utilizes [![HuggingFace Datasets](https://img.shields.io/badge/HuggingFace-uwunish%2Fghibli--dataset-yellow?style=flat&logo=huggingface)](https://huggingface.co/datasets/uwunish/ghibli-dataset), a comprehensive collection of high-quality Ghibli-inspired images designed for thorough model fine-tuning, ensuring rich and authentic visual outputs.
--   **LoRA Task**: Leverages [![HuggingFace Datasets](https://img.shields.io/badge/HuggingFace-pulnip%2Fghibli--dataset-yellow?style=flat&logo=huggingface)](https://huggingface.co/datasets/pulnip/ghibli-dataset), a lightweight and optimized dataset crafted for LoRA adaptation, enabling efficient training with reduced computational resources while maintaining the charm of Ghibli’s style.
+[Ghibli Dataset](https://huggingface.co/datasets/pulnip/ghibli-dataset)
 
-## Base Models
+## Base Model
 
-The project uses carefully selected Stable Diffusion models for each task, balancing quality, efficiency, and alignment with Ghibli’s artistic vision:
+The fine-tuning process is built upon the [Stable Diffusion 2.1 Base](https://huggingface.co/stabilityai/stable-diffusion-2-1-base) model by Stability AI. This robust text-to-image model provides a solid foundation, enabling high-fidelity image generation with targeted fine-tuning to achieve the Ghibli aesthetic.
 
--   **Full Fine-Tuning Task**: Built on [![HuggingFace Model Hub](https://img.shields.io/badge/HuggingFace-stabilityai%2Fstable--diffusion--2--1--base-yellow?style=flat&logo=huggingface)](https://huggingface.co/stabilityai/stable-diffusion-2-1-base), a powerful base model ideal for extensive fine-tuning, producing detailed and faithful Ghibli-style artwork with high fidelity.
-
--   **LoRA Task**: Based on [![HuggingFace Model Hub](https://img.shields.io/badge/HuggingFace-stabilityai%2Fstable--diffusion--2--1-yellow?style=flat&logo=huggingface)](https://huggingface.co/stabilityai/stable-diffusion-2-1), a versatile model optimized for LoRA, offering a streamlined approach for rapid experimentation and efficient generation of Ghibli-inspired visuals.
+[Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1)
 
 ## Demonstration
-License-Plate-Detector-OCR uses computer vision, OCR to detect, read license plates:
-- **HuggingFace Space**: [![HuggingFace Space Demo](https://img.shields.io/badge/HuggingFace-danhtran2mind%2FGhibli--Stable--Diffusion--Synthesis-yellow?style=flat&logo=huggingface)](https://huggingface.co/spaces/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis)
 
-- **Demo GUI**:  
-  <img src="./assets/gradio_app_demo.jpg" alt="Gradio Demo" height="600">
+Explore the model’s capabilities through the interactive demo hosted at [Ghibli Fine-Tuned SD 2.1](https://huggingface.co/spaces/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis). The demo allows users to generate Ghibli-style images effortlessly.
 
-To run the Gradio app locally (`localhost:7860`):  
-```bash
-python apps/gradio_app.py
-```
+**Preview Image**:
 
-## Usage Guide
+![Demo Image](./assets/demo_image.png?raw=true)
+
+
+## Installation
+
+To set up the project, ensure you have Python 3.11 or later installed. The following steps guide you through cloning the repository, installing dependencies, and preparing encrypted data.
+
 ### Step 1: Clone the Repository
-Clone the project repository and navigate to the project directory:
+
+Clone the repository from [GitHub](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis):
+
 ```bash
 git clone https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis.git
 cd Ghibli-Stable-Diffusion-Synthesis
+
 ```
 
 ### Step 2: Install Dependencies
-Install Dependencies using `requirements.txt`
+
+Install the required Python libraries listed in `requirements.txt`:
+
 ```bash
 pip install -r requirements/requirements.txt
+
 ```
 
-### Step 3: Configure the Environment
-Run the following scripts to set up the project:
-<!-- - **Install Third-Party Dependencies**  
-  ```bash
-  python scripts/setup_third_party.py
-  ``` -->
-#### **Download Model Checkpoints**
-```bash
-python scripts/download_ckpts.py
-```
-#### **Prepare Dataset (Optional, for Training)**  
-  ```bash
-  python scripts/download_datasets.py
-  ```
+## Usage
 
-Refer to the [Scripts Documents](docs/scripts/scripts_doc.md) for detailed arguments used in Scripts. ⚙️
+The project supports two primary use cases: training the model using the Jupyter notebook and generating images with the Gradio demo.
 
-### Training
-The Training Notebooks, available at [Training Notebooks](#training-notebooks), offer a comprehensive guide to both the Full Fine-tuning and LoRA training methods.
+### Running the Training Notebook
 
+The training notebook (`notebooks/ghibli-sd-2.1-base-finetuning.ipynb`) is the core component for fine-tuning the model. To run it:
 
-To use local datasets downloaded from Hugging Face Datasets, replace `--dataset_name` with the following in the specified notebooks:
+1.  Open the notebook in your preferred platform (Colab, SageMaker, Deepnote, or JupyterLab).
+2.  Follow the setup instructions within the notebook to configure the environment.
+3.  Execute the cells sequentially to train the model or experiment with custom hyperparameters.
 
-- In `notebooks/ghibli-sd-2.1-base-finetuning.ipynb`, replace  `--dataset_name="uwunish/ghibli-dataset"` with by `--dataset_name="data/uwunish-ghibli-dataset"`.
-- In `notebooks/ghibli-sd-2.1-lora.ipynb`, replace `--dataset_name="pulnip/ghibli-dataset"` with  `--dataset_name="data/pulnip-ghibli-dataset"`.
+The notebook includes detailed comments and explanations, making it easy to understand and modify the training process.
 
-For more information about Training, you can see [Stable Diffusion text-to-image fine-tuning](https://github.com/huggingface/diffusers/tree/main/examples/text_to_image).
+### Running the Gradio Demo
 
+To generate Ghibli-style images using the Gradio demo, follow these steps:
 
+1.  **Navigate to the Repository Root**:
+    
+    ```bash
+    cd Ghibli-Stable-Diffusion-Synthesis
+    
+    ```
+    
+2.  **Download the Fine-Tuned Model**:
+    
+    Download the model weights to the `ckpts` folder:
+    
+    ```bash
+    python scripts/download_ckpts.py
+    
+    ```
+    
+    The `download_ckpts.py` script retrieves the model from the HuggingFace repository.
+    
 
+3.  **Run the Gradio App**:
+    
+    Launch the Gradio demo to interact with the model:
+    
+    ```bash
+    python app.py --local_model
+    
+    ```
+    
+    The demo will be available at `localhost:7860`. Use `--local_model` for the local model or not pass this args to download from Hugging Face.
+    
 
-<!-- #### Config
-Configuration of the `accelerate`
-```bash
-accelerate config default
-```
-#### Training Bash
-To train the model:
-```bash
-accelerate launch ./src/f5_tts/train/finetune_cli.py \
-    --exp_name F5TTS_Base \
-    --dataset_name vin100h-preprocessed-v2 \
-    --finetune \
-    --tokenizer pinyin \
-    --learning_rate 1e-05 \
-    --batch_size_type frame \
-    --batch_size_per_gpu 3200 \
-    --max_samples 64 \
-    --grad_accumulation_steps 2 \
-    --max_grad_norm 1 \
-    --epochs 80 \
-    --num_warmup_updates 2761 \
-    --save_per_updates 4000 \
-    --keep_last_n_checkpoints 1 \
-    --last_per_updates 4000 \
-    --log_samples \
-    --pretrain "<your_pretrain_model>"# such as "./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors"
-```
-#### Training Arguments
-Refer to the [Training Documents](docs/training/training_doc.md) for detailed arguments used in fine-tuning the model. ⚙️ -->
+## Training Hyperparameters
 
-### Inference
-#### Quick Inference Bash
-- To generate iamge using the `Full Fine-tuning` model:
-```bash
-python src/ghibli_stable_diffusion_synthesis/infer.py \
-    --method full_finetuning \
-    --prompt "donald trump in ghibli style" \
-    --height 512 --width 512 \
-    --num_inference_steps 50 \
-    --guidance_scale 3.5 \
-    --seed 42 \
-    --output_path "tests/test_data/ghibli_style_output_full_finetuning.png"
-```
-- To run inference with `LoRA`:
-```bash
-python src/ghibli_stable_diffusion_synthesis/infer.py \
-    --method lora \
-    --prompt "a beautiful city in Ghibli style" \
-    --height 720 --width 1280 \
-    --num_inference_steps 100 \
-    --guidance_scale 15.5 \
-    --seed 42 \
-    --lora_scale 0.7 \
-    --output_path "tests/test_data/ghibli_style_output_lora.png"
-```
-#### Inference Arguments
-Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed arguments used in Inference. ⚙️
-### Inference Example
+The fine-tuning process was optimized with the following hyperparameters:
+
+| Hyperparameter | Value |
+| --- | --- |
+| `learning_rate` | 1e-05 |
+| `num_train_epochs` | 40 |
+| `train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 2 |
+| `mixed_precision` | "fp16" |
+| `resolution` | 512 |
+| `max_grad_norm` | 1 |
+| `lr_scheduler` | "constant" |
+| `lr_warmup_steps` | 0 |
+| `checkpoints_total_limit` | 1 |
+| `use_ema` | True |
+| `use_8bit_adam` | True |
+| `center_crop` | True |
+| `random_flip` | True |
+| `gradient_checkpointing` | True |
+
+These parameters were carefully selected to balance training efficiency and model performance, leveraging techniques like mixed precision and gradient checkpointing.
+
+## Metrics
+
+The fine-tuning process achieved a final loss of **0.0345**, indicating excellent convergence and high fidelity to the Ghibli art style.
 
 ## Environment
-- **Python**: 3.10 or higher
-- **Key Libraries**: See [requirements_compatible.txt](requirements/requirements_compatible.txt) for compatible versions
+
+The project was developed and tested in the following environment:
+
+- **Python Version**: 3.11.11
+- **Dependencies**:
+
+| Library | Version |
+| --- | --- |
+| huggingface-hub | 0.30.2 |
+| accelerate | 1.3.0 |
+| bitsandbytes | 0.45.5 |
+| torch | 2.5.1 |
+| Pillow | 11.1.0 |
+| numpy | 1.26.4 |
+| transformers | 4.51.1 |
+| torchvision | 0.20.1 |
+| diffusers | 0.33.1 |
+| gradio | Latest |
+
+Ensure your environment matches these specifications to avoid compatibility issues.
 
 ## Contact
 
 For questions, issues, please contact the maintainer via the [Issues tab](https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis/issues) on GitHub.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT), allowing for flexible use and modification while ensuring proper attribution.
+
+## Acknowledgements
+
+The success of this project is built upon the contributions of several key resources and communities:
+
+-   [Hugging Face](https://huggingface.co/) for providing the dataset and model hubs, enabling seamless access to high-quality resources.
+-   [Stability AI](https://stability.ai/) for developing the Stable Diffusion model, a cornerstone of this project.
+-   The open-source community for their continuous support and contributions to the tools and libraries used.
+
+## Contributing
+
+Contributions to this project are warmly welcomed! To contribute, please follow these steps:
+
+1.  Fork the repository from [GitHub](https://github.com/danhtran2mind/ghibli-fine-tuned-sd-2.1).
+2.  Create a new branch for your feature or bug fix.
+3.  Commit your changes with clear and descriptive commit messages.
+4.  Push your branch and submit a pull request.
+
+For detailed guidelines, refer to the [CONTRIBUTING.md](./CONTRIBUTING.md) file. Your contributions can help enhance the project and bring the Ghibli art style to a wider audience.

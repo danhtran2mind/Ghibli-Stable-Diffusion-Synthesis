@@ -1,0 +1,13 @@
+{
+    "prompt": "In a Ghibli-esque world, A close-up shows a race car's soft, sun-drenched, whimsical details.",
+    "height": 1024,
+    "width": 1024,
+    "num_inference_steps": 42,
+    "guidance_scale": 20,
+    "seed": 1589,
+    "image": "result.png",
+    "use_lora": true,
+    "lora_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+    "base_model_id": "stabilityai/stable-diffusion-2-1",
+    "lora_scale": 0.7
+}

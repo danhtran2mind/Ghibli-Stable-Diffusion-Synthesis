@@ -1,0 +1,13 @@
+{
+    "prompt": "Ghibli style, a majestic mountain towers, casting shadows on the serene beach.",
+    "height": 1024,
+    "width": 2048,
+    "num_inference_steps": 75,
+    "guidance_scale": 14.5,
+    "seed": 9999,
+    "image": "result.png",
+    "use_lora": true,
+    "lora_model_id": "danhtran2mind/Ghibli-Stable-Diffusion-2.1-LoRA",
+    "base_model_id": "stabilityai/stable-diffusion-2-1",
+    "lora_scale": 1
+}
