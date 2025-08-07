@@ -177,7 +177,7 @@ python src/ghibli_stable_diffusion_synthesis/infer.py \
     --output_path "tests/test_data/ghibli_style_output_lora.png"
 ```
 #### Inference Arguments
-Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed arguments used in Inference. ⚙️
+Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed arguments used in Inference. ⚙️ docs/inferene/inference_doc.md
 ### Inference Example
 
 ## Environment
