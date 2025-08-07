@@ -3,7 +3,7 @@ import torch
 import os
 from .example_handler import get_examples
 from .image_generator import generate_image
-from .project_info import intro_1, intro_2, intro_3, outro_1
+from .project_info import intro_1, intro_2, outro_1, outro_2
 
 def load_example_image_full_finetuning(prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id):
     return prompt, height, width, num_inference_steps, guidance_scale, seed, image, finetune_model_id, "Loaded example successfully"
@@ -29,10 +29,9 @@ def create_gui(model_configs, device):
     examples_lora = get_examples("apps/gradio_app/assets/examples/Ghibli-Stable-Diffusion-2.1-LoRA", use_lora=True)
 
     with gr.Blocks(css=custom_css, theme="ocean") as demo:
-        gr.Markdown("# Ghibli Stable Diffusion Synthesis")
+        gr.Markdown("# Ghibli Stable Diffusion Synthesis 🎨")
         gr.HTML(intro_1)
         gr.Markdown(intro_2)
-        gr.HTML(intro_3)
         with gr.Tabs():
             with gr.Tab(label="Full Finetuning"):
                 with gr.Row():
@@ -51,12 +50,14 @@ def create_gui(model_configs, device):
                             seed_ft = gr.Slider(0, 4294967295, 42, step=1, label="Seed")
                         gr.Markdown("#### Model Configuration")
                         finetune_model_path_ft = gr.Dropdown(label="Fine-tuned Model", choices=[mid for mid, cfg in model_configs.items() if cfg.get('type') == 'full_finetuning'], value=finetune_model_id)
+
+                        generate_btn_ft = gr.Button("Generate Image", variant="primary")
+                        stop_btn_ft = gr.Button("Stop Generation")
                     with gr.Column(scale=1):
                         gr.Markdown("### Generated Result")
                         output_image_ft = gr.Image(label="Generated Image", interactive=False, height=512)
                         output_text_ft = gr.Textbox(label="Status", interactive=False, lines=3)
-                        generate_btn_ft = gr.Button("Generate Image", variant="primary")
-                        stop_btn_ft = gr.Button("Stop Generation")
+                        
                 gr.Markdown("### Examples for Full Finetuning")
                 gr.Examples(examples=examples_full_finetuning, inputs=[prompt_ft, height_ft, width_ft, num_inference_steps_ft, guidance_scale_ft, seed_ft, output_image_ft, finetune_model_path_ft], 
                             outputs=[prompt_ft, height_ft, width_ft, num_inference_steps_ft, guidance_scale_ft, seed_ft, output_image_ft, finetune_model_path_ft, output_text_ft], 
@@ -81,18 +82,20 @@ def create_gui(model_configs, device):
                         gr.Markdown("#### Model Configuration")
                         lora_model_path_lora = gr.Dropdown(label="LoRA Model", choices=[mid for mid, cfg in model_configs.items() if cfg.get('type') == 'lora'], value=lora_model_id)
                         base_model_path_lora = gr.Dropdown(label="Base Model", choices=[model_configs[mid].get('base_model_id') for mid in model_configs if model_configs[mid].get('base_model_id')], value=base_model_id)
+                        
+                        generate_btn_lora = gr.Button("Generate Image", variant="primary")
+                        stop_btn_lora = gr.Button("Stop Generation")
                     with gr.Column(scale=1):
                         gr.Markdown("### Generated Result")
                         output_image_lora = gr.Image(label="Generated Image", interactive=False, height=512)
                         output_text_lora = gr.Textbox(label="Status", interactive=False, lines=3)
-                        generate_btn_lora = gr.Button("Generate Image", variant="primary")
-                        stop_btn_lora = gr.Button("Stop Generation")
+                        
                 gr.Markdown("### Examples for LoRA")
                 gr.Examples(examples=examples_lora, inputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_scale_lora], 
                             outputs=[prompt_lora, height_lora, width_lora, num_inference_steps_lora, guidance_scale_lora, seed_lora, output_image_lora, lora_model_path_lora, base_model_path_lora, lora_scale_lora, output_text_lora], 
                             fn=load_example_image_lora, cache_examples=False, examples_per_page=4)
-
         gr.HTML(outro_1)
+        gr.HTML(outro_2)
 
         generate_event_ft = generate_btn_ft.click(
             fn=generate_image, 

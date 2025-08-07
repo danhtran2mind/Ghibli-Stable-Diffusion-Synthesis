@@ -4,7 +4,7 @@ intro_1 = """
 intro_2 = """
 For CPU inference, execution time is long (e.g., ~1,200s for 512×512 resolution, 50 steps).
 """
-intro_3 = """
+outro_1 = """
     <div style="text-align: left; font-size: 14px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; align-items: center; justify-content: left; gap: 8px;">
             You can explore this GitHub Source code: <a href="https://github.com/danhtran2mind/Ghibli-Stable-Diffusion-Synthesis">
@@ -23,7 +23,7 @@ intro_3 = """
     </div>
     """.strip()
 
-outro_1 = """
+outro_2 = """
     <div style="text-align: left; font-size: 14px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; align-items: center; justify-content: left; gap: 8px;">
             The pre-trained models on Hugging Face: 
